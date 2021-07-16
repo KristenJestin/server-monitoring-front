@@ -1,4 +1,7 @@
 <template>
+    <div class="mb-10">
+        <Link href="/states/create" class="btn">Create</Link>
+    </div>
     <div>
         <div
             v-for="state in states"
@@ -16,16 +19,17 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
+import { Link } from '@inertiajs/inertia-vue3'
+
 import State from '@/models/State'
 
 export default defineComponent({
-    name: 'Index',
     props: {
         states: {
             type: Object as PropType<State[]>,
             required: true,
         },
     },
-    setup() {},
+    components: { Link },
 })
 </script>

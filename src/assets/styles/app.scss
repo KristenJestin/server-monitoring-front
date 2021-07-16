@@ -1,0 +1,22 @@
+@import './tailwind.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap');
+
+.btn {
+    @apply py-2 px-4 bg-primary-500 text-white font-semibold rounded-lg shadow-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-75 transition ease-in-out duration-300;
+}
+
+.form-group {
+    @apply mb-5;
+
+    .label {
+        @apply block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200;
+    }
+    .input {
+        @apply flex-1 appearance-none border w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-md rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-primary-500;
+
+        &.input-error {
+            @apply ring-2 ring-red-500;
+        }
+    }
+}

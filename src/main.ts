@@ -1,9 +1,20 @@
+// imports
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/inertia-vue3'
+import { InertiaProgress } from '@inertiajs/progress'
 
 import Layout from '@/components/Layout.vue'
-import '@/assets/index.css'
+import '@/assets/styles/app.scss'
 
+// config
+InertiaProgress.init({
+    // The color of the progress bar.
+    color: '#29d',
+    // Whether the NProgress spinner will be shown.
+    showSpinner: true,
+})
+
+// main
 createInertiaApp({
     resolve: async (name) => {
         const page = await import(`./Pages/${name}.vue`).then((module) => module.default)

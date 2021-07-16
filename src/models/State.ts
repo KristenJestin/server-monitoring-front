@@ -1,4 +1,4 @@
-// improts
+// imports
 import { DateTime } from 'luxon'
 
 // main
