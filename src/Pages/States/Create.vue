@@ -46,48 +46,19 @@
     <div class="mt-10">
         <form @submit.prevent="submit">
             <FormGroup :form="form" name="name" label="Name" :errors="errors?.name" />
-
-            <div class="form-group">
-                <label for="form-color" class="label">Background Color</label>
-                <input
-                    id="form-color"
-                    type="text"
-                    class="input"
-                    :class="errors?.color ? 'input-error' : ''"
-                    v-model="form.color"
-                />
-                <span v-if="errors?.color" class="font-light text-sm text-red-600">{{
-                    errors.color[0]
-                }}</span>
-            </div>
-
-            <div class="form-group">
-                <label for="form-border-color" class="label">Border Color</label>
-                <input
-                    id="form-border-color"
-                    type="text"
-                    class="input"
-                    :class="errors?.borderColor ? 'input-error' : ''"
-                    v-model="form.borderColor"
-                />
-                <span v-if="errors?.borderColor" class="font-light text-sm text-red-600">{{
-                    errors.borderColor[0]
-                }}</span>
-            </div>
-
-            <div class="form-group">
-                <label for="form-textc-color" class="label">Text Color</label>
-                <input
-                    id="form-textc-color"
-                    type="text"
-                    class="input"
-                    :class="errors?.textColor ? 'input-error' : ''"
-                    v-model="form.textColor"
-                />
-                <span v-if="errors?.textColor" class="font-light text-sm text-red-600">{{
-                    errors.textColor[0]
-                }}</span>
-            </div>
+            <FormGroup :form="form" name="color" label="Background Color" :errors="errors?.color" />
+            <FormGroup
+                :form="form"
+                name="borderColor"
+                label="Border Color"
+                :errors="errors?.borderColor"
+            />
+            <FormGroup
+                :form="form"
+                name="textColor"
+                label="Text Color"
+                :errors="errors?.textColor"
+            />
 
             <button type="submit" class="btn">Submit</button>
         </form>
