@@ -3,17 +3,13 @@
         <Link href="/states/create" class="btn btn-primary">Create</Link>
     </div>
     <div>
-        <Link
-            v-for="state in states"
-            :href="`/states/` + state.slug"
-            :style="{
-                backgroundColor: state.color,
-                border: `4px solid ${state.border_color}`,
-                color: state.text_color,
-                marginBottom: '20px',
-            }"
-        >
-            {{ state.name }}
+        <Link v-for="state in states" :href="`/states/` + state.slug" class="block m-5">
+            <Tag
+                :name="state.name"
+                :background-color="state.color"
+                :border-color="state.border_color"
+                :text-color="state.text_color"
+            />
         </Link>
     </div>
 </template>
@@ -23,6 +19,7 @@ import { defineComponent, PropType } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 
 import State from '@/models/State'
+import Tag from '@/components/Tag.vue'
 
 export default defineComponent({
     props: {
@@ -31,6 +28,6 @@ export default defineComponent({
             required: true,
         },
     },
-    components: { Link },
+    components: { Link, Tag },
 })
 </script>
