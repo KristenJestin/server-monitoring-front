@@ -1,7 +1,9 @@
 <template>
     <div class="mb-10 flex justify-end">
         <button class="btn btn-danger mr-4" @click="deleteButtonPress">Delete</button>
-        <Link :href="'/states/' + state.slug + '/edit'" class="btn btn-muted">Edit</Link>
+        <Link :href="$routes.get('states.edit', { id: state.slug })" class="btn btn-muted"
+            >Edit</Link
+        >
     </div>
     <div>
         <div
@@ -25,10 +27,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue'
+import { defineComponent, PropType, ref, inject } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
+import { RoutesModule } from '@/plugins/routes/props'
 import StateModel from '@/models/State'
 import Modal from '@/components/Modal.vue'
 
@@ -41,14 +44,19 @@ export default defineComponent({
     },
     components: { Link, Modal },
     setup({ state }) {
+        // refs
+        const $routes = inject<RoutesModule>('$routes')
         const modalOpen = ref(false)
+
+        // methods
         const deleteButtonPress = () => {
             modalOpen.value = true
         }
         const destroy = () => {
-            Inertia.delete(`/states/${state.slug}`)
+            Inertia.delete($routes?.get('states.destroy', { id: state.slug }) || '')
         }
 
+        // return
         return {
             destroy,
             deleteButtonPress,

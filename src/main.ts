@@ -4,6 +4,7 @@ import { createInertiaApp } from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
 
 import Layout from '@/components/Layout.vue'
+import Routes from '@/plugins/routes'
 import '@/assets/styles/app.scss'
 
 // config
@@ -24,6 +25,7 @@ createInertiaApp({
     setup({ el, app, props, plugin }) {
         createApp({ render: () => h(app, props) })
             .use(plugin)
+            .use(Routes)
             .mount(el)
     },
 })

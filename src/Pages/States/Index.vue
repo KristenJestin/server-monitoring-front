@@ -3,14 +3,16 @@
         <Link href="/states/create" class="btn btn-primary">Create</Link>
     </div>
     <div>
-        <Link v-for="state in states" :href="`/states/` + state.slug" class="block m-5">
-            <Tag
-                :name="state.name"
-                :background-color="state.color"
-                :border-color="state.border_color"
-                :text-color="state.text_color"
-            />
-        </Link>
+        <div v-for="state in states" class="block m-5">
+            <Link :href="$routes.get('states.show', { id: state.slug })">
+                <Tag
+                    :name="state.name"
+                    :background-color="state.color"
+                    :border-color="state.border_color"
+                    :text-color="state.text_color"
+                />
+            </Link>
+        </div>
     </div>
 </template>
 

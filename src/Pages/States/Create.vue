@@ -58,7 +58,9 @@
 
             <div class="flex mt-6">
                 <div>
-                    <Link href="/states" class="btn btn-muted mr-5">Cancel</Link>
+                    <Link :href="$routes.get('states.index')" class="btn btn-muted mr-5"
+                        >Cancel</Link
+                    >
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="ml-auto">
@@ -75,10 +77,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, PropType } from 'vue'
+import { defineComponent, PropType, reactive, inject } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
+import { RoutesModule } from '@/plugins/routes/props'
 import Errors from '@/models/Error'
 import FormGroup from '@/components/FormGroup.vue'
 import ErrorMessage from '@/components/ErrorMessage.vue'
@@ -93,6 +96,9 @@ export default defineComponent({
     },
     components: { Link, FormGroup, ErrorMessage, Tag },
     setup() {
+        // refs
+        const $routes = inject<RoutesModule>('$routes')
+        // data
         const form = reactive({
             name: '',
             color: '',
@@ -100,10 +106,12 @@ export default defineComponent({
             borderColor: '',
         })
 
+        // methods
         const submit = () => {
-            Inertia.post('/states', form)
+            Inertia.post($routes?.get('states.store') || '', form)
         }
 
+        // return
         return { form, submit }
     },
 })
