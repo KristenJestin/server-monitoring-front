@@ -83,8 +83,8 @@ import { Inertia } from '@inertiajs/inertia'
 
 import { RoutesModule } from '@/plugins/routes/props'
 import StateModel from '@/models/State'
-import ErrorsModel from '@/models/Error'
-import FormGroup from '@/components/FormGroup.vue'
+import ErrorsModel from '@/models/extras/Error'
+import FormGroup from '@/components/forms/FormGroup.vue'
 import ErrorMessage from '@/components/ErrorMessage.vue'
 import Tag from '@/components/Tag.vue'
 
@@ -103,7 +103,6 @@ export default defineComponent({
     setup({ state }) {
         // refs
         const $routes = inject<RoutesModule>('$routes')
-        // data
         const form = reactive({
             name: state.name,
             color: state.color,

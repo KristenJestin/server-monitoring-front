@@ -82,8 +82,8 @@ import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
 import { RoutesModule } from '@/plugins/routes/props'
-import Errors from '@/models/Error'
-import FormGroup from '@/components/FormGroup.vue'
+import Errors from '@/models/extras/Error'
+import FormGroup from '@/components/forms/FormGroup.vue'
 import ErrorMessage from '@/components/ErrorMessage.vue'
 import Tag from '@/components/Tag.vue'
 
@@ -98,7 +98,6 @@ export default defineComponent({
     setup() {
         // refs
         const $routes = inject<RoutesModule>('$routes')
-        // data
         const form = reactive({
             name: '',
             color: '',

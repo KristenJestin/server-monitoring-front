@@ -1,6 +1,6 @@
 <template>
     <div class="mb-5">
-        <label :for="id" class="label">{{ label }}</label>
+        <label :for="id" class="block text-sm font-medium text-gray-700">{{ label }}</label>
         <input
             :id="id"
             :name="'form.' + name"
@@ -8,17 +8,18 @@
             class="
                 flex-1
                 appearance-none
-                border
                 w-full
-                py-2
-                px-4
                 bg-white
                 text-gray-700
                 placeholder-gray-400
-                shadow-md
+                border
                 rounded-lg
-                text-base
+                shadow-md
+                px-4
+                py-2
+                text-left text-base
                 focus:outline-none focus:ring-2 focus:ring-primary-500
+                sm:text-sm
             "
             :class="errors ? 'ring-2 ring-red-500' : ''"
             v-model="form[name]"
@@ -32,15 +33,15 @@ import { defineComponent, PropType, computed } from 'vue'
 
 export default defineComponent({
     props: {
-        label: {
-            type: String,
-            required: true,
-        },
         form: {
             type: Object,
             required: true,
         },
         name: {
+            type: String,
+            required: true,
+        },
+        label: {
             type: String,
             required: true,
         },

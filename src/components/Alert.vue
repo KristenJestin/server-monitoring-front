@@ -58,7 +58,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue'
 
-import Alert from '@/models/Alert'
+import Alert from '@/models/extras/Alert'
 
 export default defineComponent({
     props: {

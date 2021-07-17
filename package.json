@@ -8,6 +8,7 @@
         "format": "prettier --write ."
     },
     "dependencies": {
+        "@heroicons/vue": "^1.0.2",
         "@inertiajs/inertia": "^0.10.0",
         "@inertiajs/inertia-vue3": "^0.5.1",
         "@inertiajs/progress": "^0.2.6",

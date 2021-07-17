@@ -256,7 +256,7 @@
 import { defineComponent, PropType } from 'vue'
 
 import Alert from '@/components/Alert.vue'
-import AlertModel from '@/models/Alert'
+import AlertModel from '@/models/extras/Alert'
 
 export default defineComponent({
     props: {
