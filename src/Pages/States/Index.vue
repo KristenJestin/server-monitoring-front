@@ -1,10 +1,11 @@
 <template>
-    <div class="mb-10">
-        <Link href="/states/create" class="btn">Create</Link>
+    <div class="mb-10 flex justify-end">
+        <Link href="/states/create" class="btn btn-primary">Create</Link>
     </div>
     <div>
-        <div
+        <Link
             v-for="state in states"
+            :href="`/states/` + state.slug"
             :style="{
                 backgroundColor: state.color,
                 border: `4px solid ${state.border_color}`,
@@ -13,7 +14,7 @@
             }"
         >
             {{ state.name }}
-        </div>
+        </Link>
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="bg-gray-800">
+        <nav class="bg-gray-800 fixed w-full z-10 top-0">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center">
@@ -222,8 +222,7 @@
                 </div>
             </div>
         </nav>
-
-        <header class="bg-white shadow">
+        <header class="bg-white shadow mt-16">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <h1 class="font-header uppercase text-3xl font-extrabold text-gray-900">
                     Dashboard
@@ -249,9 +248,9 @@
                 enter-active-class="transform transition duration-500 ease-out"
                 enter-from-class="-translate-x-8 opacity-0"
                 enter-to-class="translate-x-0 opacity-100"
-                leave-active-class="transform transition duration-300 ease-in"
+                leave-active-class="transform transition duration-200 ease-in"
                 leave-from-class="translate-x-0 opacity-100"
-                leave-to-class="translate-x-8 opacity-0"
+                leave-to-class="translate-x-4 opacity-0"
             >
                 <Alert v-if="alert" :value="alert" />
             </transition>

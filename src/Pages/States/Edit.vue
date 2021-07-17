@@ -25,32 +25,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, PropType } from 'vue'
-import { Inertia } from '@inertiajs/inertia'
+import { defineComponent, PropType, reactive } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
+import { Inertia } from '@inertiajs/inertia'
 
-import Errors from '@/models/Error'
+import StateModel from '@/models/State'
+import ErrorsModel from '@/models/Error'
 import FormGroup from '@/components/FormGroup.vue'
 import ErrorMessage from '@/components/ErrorMessage.vue'
 
 export default defineComponent({
     props: {
+        state: {
+            type: Object as PropType<StateModel>,
+            required: true,
+        },
         errors: {
-            type: Object as PropType<Errors>,
+            type: Object as PropType<ErrorsModel>,
             required: false,
         },
     },
     components: { Link, FormGroup, ErrorMessage },
-    setup() {
+    setup({ state }) {
         const form = reactive({
-            name: '',
-            color: '',
-            textColor: '',
-            borderColor: '',
+            name: state.name,
+            color: state.color,
+            textColor: state.text_color,
+            borderColor: state.border_color,
         })
 
         const submit = () => {
-            Inertia.post('/states', form)
+            console.log(state)
+            Inertia.put(`/states/${state.slug}`, form)
         }
 
         return { form, submit }
