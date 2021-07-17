@@ -10,10 +10,10 @@
                         ></path>
                     </svg>
 
-                    <b class="mx-3">Validation Error.</b>
+                    <p class="mx-3">Validation Error.</p>
                 </div>
 
-                <button
+                <!-- <button
                     class="
                         p-1
                         transition-colors
@@ -38,24 +38,54 @@
                             stroke-linejoin="round"
                         />
                     </svg>
-                </button>
+                </button> -->
             </div>
         </div>
     </div>
 
     <div class="mt-10">
         <form @submit.prevent="submit">
+            <FormGroup :form="form" name="name" label="Name" :errors="errors?.name" />
+
             <div class="form-group">
-                <label for="form-name" class="label">Name</label>
+                <label for="form-color" class="label">Background Color</label>
                 <input
-                    id="form-name"
+                    id="form-color"
                     type="text"
                     class="input"
-                    :class="errors?.name ? 'input-error' : ''"
-                    v-model="form.name"
+                    :class="errors?.color ? 'input-error' : ''"
+                    v-model="form.color"
                 />
-                <span v-if="errors?.name" class="font-light text-sm text-red-600">{{
-                    errors.name[0]
+                <span v-if="errors?.color" class="font-light text-sm text-red-600">{{
+                    errors.color[0]
+                }}</span>
+            </div>
+
+            <div class="form-group">
+                <label for="form-border-color" class="label">Border Color</label>
+                <input
+                    id="form-border-color"
+                    type="text"
+                    class="input"
+                    :class="errors?.borderColor ? 'input-error' : ''"
+                    v-model="form.borderColor"
+                />
+                <span v-if="errors?.borderColor" class="font-light text-sm text-red-600">{{
+                    errors.borderColor[0]
+                }}</span>
+            </div>
+
+            <div class="form-group">
+                <label for="form-textc-color" class="label">Text Color</label>
+                <input
+                    id="form-textc-color"
+                    type="text"
+                    class="input"
+                    :class="errors?.textColor ? 'input-error' : ''"
+                    v-model="form.textColor"
+                />
+                <span v-if="errors?.textColor" class="font-light text-sm text-red-600">{{
+                    errors.textColor[0]
                 }}</span>
             </div>
 
@@ -70,18 +100,22 @@ import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
 import Errors from '@/models/Error'
+import FormGroup from '@/components/FormGroup.vue'
 
 export default defineComponent({
-    components: { Link },
     props: {
         errors: {
             type: Object as PropType<Errors>,
             required: false,
         },
     },
+    components: { Link, FormGroup },
     setup() {
         const form = reactive({
-            name: null,
+            name: '',
+            color: '',
+            textColor: '',
+            borderColor: '',
         })
 
         const submit = () => {
