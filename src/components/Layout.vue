@@ -53,7 +53,7 @@
                                         text-sm
                                         font-medium
                                     "
-                                    >Projects</a
+                                    >Documents</a
                                 >
 
                                 <a
