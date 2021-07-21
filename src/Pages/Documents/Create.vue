@@ -14,7 +14,14 @@
                     :form="form"
                     name="tag"
                     :errors="errors?.tag"
-                    :options="tags"
+                    :options="
+                        tags.map((tag) => ({
+                            label: tag.name,
+                            value: tag.name,
+                            color: tag.color,
+                            textColor: tag.text_color,
+                        }))
+                    "
                     idProperty="slug"
                     extra-style-background-color="color"
                     extra-style-text-color="text_color"
