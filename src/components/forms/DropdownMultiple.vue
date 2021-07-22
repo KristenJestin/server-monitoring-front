@@ -142,24 +142,8 @@ export default defineComponent({
             type: Array as PropType<any[]>,
             required: true,
         },
-        idProperty: {
-            type: String,
-            default: 'id',
-        },
-        nameProperty: {
-            type: String,
-            default: 'name',
-        },
         errors: {
             type: Array as PropType<string[]>,
-            required: false,
-        },
-        extraStyleBackgroundColor: {
-            type: String,
-            required: false,
-        },
-        extraStyleTextColor: {
-            type: String,
             required: false,
         },
     },

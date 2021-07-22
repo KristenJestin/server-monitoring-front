@@ -9,8 +9,7 @@ interface Document {
     name: string
     description: string
     slug: string
-    tag_id: string
-    tag?: Tag
+    tags?: Tag[]
     created_at: DateTime
     updated_at: DateTime
 }

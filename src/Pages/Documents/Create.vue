@@ -9,11 +9,11 @@
                 <FormError :errors="errors?.name" />
             </FormGroup>
             <FormGroup>
-                <FormLabel label="Tag" name="tag" />
+                <FormLabel label="Tags" name="tags" />
                 <Dropdown
                     :form="form"
-                    name="tag"
-                    :errors="errors?.tag"
+                    name="tags"
+                    :errors="errors?.tags"
                     :options="
                         tags.map((tag) => ({
                             label: tag.name,
@@ -22,11 +22,8 @@
                             textColor: tag.text_color,
                         }))
                     "
-                    idProperty="slug"
-                    extra-style-background-color="color"
-                    extra-style-text-color="text_color"
                 />
-                <FormError :errors="errors?.tag" />
+                <FormError :errors="errors?.tags" />
             </FormGroup>
 
             <div class="mt-6">
@@ -77,14 +74,13 @@ export default defineComponent({
         CheckIcon,
         SelectorIcon,
     },
-    setup({ tags }) {
+    setup() {
         // refs
         const $routes = inject<RoutesModule>('$routes')
         const form = reactive({
             name: '',
-            tag: [],
+            tags: [],
         })
-        const tagDropdownOpen = ref(false)
 
         // methods
         const submit = () => {

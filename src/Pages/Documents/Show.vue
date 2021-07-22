@@ -12,6 +12,9 @@
             }"
         >
             {{ document.name }}
+            <ul>
+                <li v-for="tag in document.tags">{{ tag.name }}</li>
+            </ul>
         </div>
     </div>
     <Modal
