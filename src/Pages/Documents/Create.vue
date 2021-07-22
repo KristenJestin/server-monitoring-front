@@ -25,6 +25,11 @@
                 />
                 <FormError :errors="errors?.tags" />
             </FormGroup>
+            <FormGroup>
+                <FormLabel label="File" name="file" />
+                <FileInput :form="form" name="file" :errors="errors?.file" />
+                <FormError :errors="errors?.file" />
+            </FormGroup>
 
             <div class="mt-6">
                 <Link :href="$routes.get('documents.index')" class="btn btn-muted mr-5"
@@ -37,9 +42,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, reactive, inject, computed } from 'vue'
+import { defineComponent, PropType, ref, reactive, inject } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
-import { Link } from '@inertiajs/inertia-vue3'
+import { Link, useForm } from '@inertiajs/inertia-vue3'
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
 
 import { RoutesModule } from '@/plugins/routes/props'
@@ -48,6 +53,7 @@ import Errors from '@/models/extras/Error'
 import FormGroup from '@/components/forms/FormGroup2.vue'
 import Dropdown from '@/components/forms/DropdownMultiple.vue'
 import Input from '@/components/forms/Input.vue'
+import FileInput from '@/components/forms/FileInput.vue'
 import FormLabel from '@/components/forms/FormLabel.vue'
 import FormError from '@/components/forms/FormError.vue'
 import ErrorMessage from '@/components/ErrorMessage.vue'
@@ -73,18 +79,23 @@ export default defineComponent({
         ErrorMessage,
         CheckIcon,
         SelectorIcon,
+        FileInput,
     },
     setup() {
         // refs
         const $routes = inject<RoutesModule>('$routes')
-        const form = reactive({
+
+        const form = reactive<{ name: string; tags: string[]; file?: File }>({
             name: '',
             tags: [],
+            file: undefined,
         })
 
         // methods
         const submit = () => {
-            Inertia.post($routes?.get('documents.store') || '', form)
+            Inertia.post($routes?.get('documents.store') || '', form, {
+                forceFormData: true,
+            })
         }
 
         // return
