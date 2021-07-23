@@ -25,6 +25,11 @@
                 />
                 <FormError :errors="errors?.tags" />
             </FormGroup>
+            <FormGroup>
+                <FormLabel label="Notes" name="notes" />
+                <MarkdownInput :form="form" name="notes" :errors="errors?.notes" />
+                <FormError :errors="errors?.notes" />
+            </FormGroup>
 
             <div class="flex mt-6">
                 <div>
@@ -53,6 +58,7 @@ import Dropdown from '@/components/forms/DropdownMultiple.vue'
 import Input from '@/components/forms/Input.vue'
 import FormLabel from '@/components/forms/FormLabel.vue'
 import FormError from '@/components/forms/FormError.vue'
+import MarkdownInput from '@/components/forms/MarkdownInput.vue'
 
 export default defineComponent({
     props: {
@@ -69,13 +75,24 @@ export default defineComponent({
             required: false,
         },
     },
-    components: { Link, FormGroup, ErrorMessage, Document, Dropdown, Input, FormLabel, FormError },
+    components: {
+        Link,
+        FormGroup,
+        ErrorMessage,
+        Document,
+        Dropdown,
+        Input,
+        FormLabel,
+        FormError,
+        MarkdownInput,
+    },
     setup({ document }) {
         // refs
         const $routes = inject<RoutesModule>('$routes')
-        const form = reactive({
+        const form = reactive<{ name: string; tags: string[]; notes?: string }>({
             name: document.name,
             tags: document.tags!.map((tag) => tag.name),
+            notes: document.notes || '',
         })
 
         // methods

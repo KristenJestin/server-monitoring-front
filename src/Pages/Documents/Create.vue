@@ -30,6 +30,11 @@
                 <FileInput :form="form" name="file" :errors="errors?.file" />
                 <FormError :errors="errors?.file" />
             </FormGroup>
+            <FormGroup>
+                <FormLabel label="Notes" name="notes" />
+                <MarkdownInput :form="form" name="notes" :errors="errors?.notes" />
+                <FormError :errors="errors?.notes" />
+            </FormGroup>
 
             <div class="mt-6">
                 <Link :href="$routes.get('documents.index')" class="btn btn-muted mr-5"
@@ -57,6 +62,7 @@ import FileInput from '@/components/forms/FileInput.vue'
 import FormLabel from '@/components/forms/FormLabel.vue'
 import FormError from '@/components/forms/FormError.vue'
 import ErrorMessage from '@/components/ErrorMessage.vue'
+import MarkdownInput from '@/components/forms/MarkdownInput.vue'
 
 export default defineComponent({
     props: {
@@ -80,15 +86,17 @@ export default defineComponent({
         CheckIcon,
         SelectorIcon,
         FileInput,
+        MarkdownInput,
     },
     setup() {
         // refs
         const $routes = inject<RoutesModule>('$routes')
 
-        const form = reactive<{ name: string; tags: string[]; file?: File }>({
+        const form = reactive<{ name: string; tags: string[]; file?: File; notes: string }>({
             name: '',
             tags: [],
             file: undefined,
+            notes: '',
         })
 
         // methods

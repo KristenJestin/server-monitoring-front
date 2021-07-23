@@ -10,6 +10,8 @@ interface Document {
     description: string
     slug: string
     tags?: Tag[]
+    notes?: string
+
     created_at: DateTime
     updated_at: DateTime
 }
