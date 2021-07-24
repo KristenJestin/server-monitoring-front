@@ -1,33 +1,25 @@
 <template>
     <DatePicker
-        v-model="form[name]"
+        v-model="value"
         color="purple"
         :masks="{
             input: 'YYYY-MM-DD',
         }"
         :first-day-of-week="2"
     >
-        <template v-slot="{ inputValue, inputEvents, isDragging, updateValue }">
+        <template v-slot="{ inputValue, inputEvents, updateValue }">
             <div class="flex flex-col sm:flex-row justify-start items-center">
                 <div class="relative flex-grow">
                     <CalendarIcon
                         class="text-gray-600 w-4 h-full mx-3 absolute pointer-events-none"
                     />
 
-                    <span
+                    <div
                         v-if="!inputValue"
-                        class="
-                            text-gray-400
-                            h-full
-                            pl-10
-                            text-sm
-                            mx-3
-                            absolute
-                            pointer-events-none
-                            italic
-                        "
-                        >No date selected</span
+                        class="absolute flex items-center h-full pointer-events-none"
                     >
+                        <span class="text-gray-400 pl-10 text-sm italic">No date selected</span>
+                    </div>
                     <input
                         class="
                             flex-1
@@ -46,24 +38,31 @@
                             focus:outline-none focus:ring-2 focus:ring-primary-500
                             sm:text-sm
                         "
-                        :class="isDragging ? 'text-gray-600' : 'text-gray-900'"
+                        :class="errors ? 'ring-2 ring-red-500' : ''"
                         :value="inputValue"
                         v-on="inputEvents"
                     />
-                    <XIcon
+                    <div
+                        v-if="inputValue"
                         class="
-                            text-red-600
-                            w-4
+                            w-12
                             h-full
-                            mx-3
                             top-0
                             right-0
                             absolute
-                            transition-all
-                            hover:bg-gray-200
+                            cursor-pointer
+                            flex
+                            justify-center
+                            items-center
+                            opacity-40
+                            hover:opacity-80
+                            transition
+                            duration-300
                         "
                         @click="updateValue(undefined)"
-                    />
+                    >
+                        <XIcon class="w-4" />
+                    </div>
                 </div>
             </div>
         </template>
@@ -71,19 +70,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, ref, watch } from 'vue'
 import { DatePicker } from 'v-calendar'
-import { CalendarIcon, XIcon } from '@heroicons/vue/outline'
+import { CalendarIcon } from '@heroicons/vue/outline'
+import { XIcon } from '@heroicons/vue/solid'
 
 export default defineComponent({
     props: {
-        form: {
-            type: Object,
-            required: true,
-        },
         name: {
             type: String,
             required: true,
+        },
+        modelValue: {
+            type: Object as PropType<Date>,
+            required: false,
         },
         errors: {
             type: Array as PropType<string[]>,
@@ -95,9 +95,15 @@ export default defineComponent({
         CalendarIcon,
         XIcon,
     },
-    setup({ name }) {
+    setup({ modelValue, name }, { emit }) {
+        const value = ref(modelValue)
+        watch(value, (v) => {
+            emit('update:modelValue', v)
+        })
+
         return {
             id: 'form-' + name,
+            value,
         }
     },
 })

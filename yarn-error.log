@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add markde
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add DOMPurify
 
 PATH: 
   C:\cmder\bin;C:\cmder\vendor\bin;C:\Program Files\ImageMagick-7.0.10-Q16-HDRI;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\wamp64\bin\php\php7.3.1;C:\Program Files (x86)\Yarn\bin\;C:\composer;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Symfony;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\ProgramData\chocolatey\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\KriS\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\KriS\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\KriS\AppData\Local\Programs\Python\Python39\;C:\Users\KriS\AppData\Local\Microsoft\WindowsApps;C:\Users\KriS\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\KriS\AppData\Local\GitHubDesktop\bin;C:\opt\Java\apache-maven-3.6.1\\bin;C:\Users\KriS\AppData\Roaming\npm;C:\Users\KriS\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\JetBrains\PhpStorm 2019.3.2\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2019.3.2\bin;C:\Users\KriS\AppData\Local\Pandoc\;C:\Users\KriS\AppData\Roaming\nvm;C:\Program Files\FFmpeg\bin;C:\Program Files\Java\jdk1.8.0_161\bin;C:\Users\KriS\.dotnet\tools;C:\Users\KriS\AppData\Local\gitkraken\bin;C:\Users\KriS\AppData\Local\Microsoft\WindowsApps;C:\Users\KriS\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\wamp64\bin\php\php7.3.1;C:\Program Files\heroku\bin;C:\cmder\vendor\git-for-windows\cmd;C:\cmder\vendor\git-for-windows\mingw64\bin;C:\cmder\vendor\git-for-windows\usr\bin;C:\cmder
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/markde: Not found
+  Error: https://registry.yarnpkg.com/DOMPurify: Not found
       at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:65167:18)
       at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:129541:22)
       at Request.emit (events.js:315:20)
@@ -41,8 +41,13 @@ npm manifest:
           "@inertiajs/inertia": "^0.10.0",
           "@inertiajs/inertia-vue3": "^0.5.1",
           "@inertiajs/progress": "^0.2.6",
+          "@popperjs/core": "^2.9.2",
+          "@types/marked": "^2.0.4",
           "luxon": "^2.0.1",
-          "vue": "^3.0.5"
+          "marked": "^2.1.3",
+          "v-calendar": "^3.0.0-alpha.5",
+          "vue": "^3.0.5",
+          "vue-currency-input": "^2.0.0"
       },
       "devDependencies": {
           "@types/luxon": "^1.27.1",
@@ -160,15 +165,30 @@ Lockfile:
       "@nodelib/fs.scandir" "2.1.5"
       fastq "^1.6.0"
   
+  "@popperjs/core@^2.9.2":
+    version "2.9.2"
+    resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
+    integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
+  
   "@types/estree@^0.0.48":
     version "0.0.48"
     resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.48.tgz#18dc8091b285df90db2f25aa7d906cfc394b7f74"
     integrity sha512-LfZwXoGUDo0C3me81HXgkBg5CTQYb6xzEl+fNmbO4JdRiSKQ8A0GD1OBBvKAIsbCUgoyAty7m99GqqMQe784ew==
   
+  "@types/lodash@^4.14.165":
+    version "4.14.171"
+    resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.171.tgz#f01b3a5fe3499e34b622c362a46a609fdb23573b"
+    integrity sha512-7eQ2xYLLI/LsicL2nejW9Wyko3lcpN6O/z0ZLHrEQsg280zIdCv1t/0m6UtBjUHokCGBQ3gYTbHzDkZ1xOBwwg==
+  
   "@types/luxon@^1.27.1":
     version "1.27.1"
     resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-1.27.1.tgz#aceeb2d5be8fccf541237e184e37ecff5faa9096"
     integrity sha512-cPiXpOvPFDr2edMnOXlz3UBDApwUfR+cpizvxCy0n3vp9bz/qe8BWzHPIEFcy+ogUOyjKuCISgyq77ELZPmkkg==
+  
+  "@types/marked@^2.0.4":
+    version "2.0.4"
+    resolved "https://registry.yarnpkg.com/@types/marked/-/marked-2.0.4.tgz#34a0ea548afe6e0c01095229d47b48b2af650613"
+    integrity sha512-L9VRSe0Id8xbPL99mUo/4aKgD7ZoRwFZqUQScNKHi2pFjF9ZYSMNShUHD6VlMT6J/prQq0T1mxuU25m3R7dFzg==
   
   "@types/parse-json@^4.0.0":
     version "4.0.0"
@@ -527,6 +547,11 @@ Lockfile:
     dependencies:
       bluebird "^3.7.2"
   
+  core-js@^3.7.0:
+    version "3.15.2"
+    resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.15.2.tgz#740660d2ff55ef34ce664d7e2455119c5bdd3d61"
+    integrity sha512-tKs41J7NJVuaya8DxIOCnl8QuPHx5/ZVbFo1oKgVl1qHFBBrDctzQGtuLjPpRdNTWmKPH6oEvgN/MUID+l485Q==
+  
   core-util-is@~1.0.0:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -557,6 +582,16 @@ Lockfile:
     version "2.6.17"
     resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.17.tgz#4cf30eb87e1d1a005d8b6510f95292413f6a1c0e"
     integrity sha512-u1wmTI1jJGzCJzWndZo8mk4wnPTZd1eOIYTYvuEyOQGfmDl3TrabCCfKnOC86FZwW/9djqTl933UF/cS425i9A==
+  
+  date-fns-tz@^1.0.12:
+    version "1.1.4"
+    resolved "https://registry.yarnpkg.com/date-fns-tz/-/date-fns-tz-1.1.4.tgz#38282c2bfab08946a4e9bb89d733451e5525048b"
+    integrity sha512-lQ+FF7xUxxRuRqIY7H/lagnT3PhhSnnvtGHzjE5WZKwRyLU7glJfLys05SZ7zHlEr6RXWiqkmgWq4nCkcElR+g==
+  
+  date-fns@^2.16.1:
+    version "2.23.0"
+    resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.23.0.tgz#4e886c941659af0cf7b30fafdd1eaa37e88788a9"
+    integrity sha512-5ycpauovVyAk0kXNZz6ZoB9AYMZB4DObse7P3BPWmyEjXNORTI8EJ6X0uaSAq4sCHzM1uajzrkr6HnsLQpxGXA==
   
   deepmerge@^4.0.0:
     version "4.2.2"
@@ -950,7 +985,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lodash.topath/-/lodash.topath-4.5.2.tgz#3616351f3bba61994a0931989660bd03254fd009"
     integrity sha1-NhY1Hzu6YZlKCTGYlmC9AyVP0Ak=
   
-  lodash@^4.17.21:
+  lodash@^4.17.20, lodash@^4.17.21:
     version "4.17.21"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
     integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -973,6 +1008,11 @@ Lockfile:
     integrity sha512-4CrMT5DOHTDk4HYDlzmwu4FVCcIYI8gauveasrdCu2IKIFOJ3f0v/8MDGJCDL9oD2ppz/Av1b0Nj345H9M+XIA==
     dependencies:
       sourcemap-codec "^1.4.4"
+  
+  marked@^2.1.3:
+    version "2.1.3"
+    resolved "https://registry.yarnpkg.com/marked/-/marked-2.1.3.tgz#bd017cef6431724fd4b27e0657f5ceb14bff3753"
+    integrity sha512-/Q+7MGzaETqifOMWYEA7HVMaZb4XbcRfaOzcSsHZEith83KGlvaSG33u0SKu89Mj5h+T8V2hM+8O45Qc5XTgwA==
   
   merge-source-map@^1.1.0:
     version "1.1.0"
@@ -1502,6 +1542,17 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
     integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
   
+  v-calendar@^3.0.0-alpha.5:
+    version "3.0.0-alpha.5"
+    resolved "https://registry.yarnpkg.com/v-calendar/-/v-calendar-3.0.0-alpha.5.tgz#a76a08a9b177d9d0de6197c56600332924e7dc83"
+    integrity sha512-KGTzBDQzSbk1nwHvvm1zb3rcTYB4giL46mOjNvwtgxrvM2a5Kt7Ytxa9HolNIrDl8eYgMrfPY0L7bNnGb7dXCA==
+    dependencies:
+      "@types/lodash" "^4.14.165"
+      core-js "^3.7.0"
+      date-fns "^2.16.1"
+      date-fns-tz "^1.0.12"
+      lodash "^4.17.20"
+  
   vite@^2.4.2:
     version "2.4.2"
     resolved "https://registry.yarnpkg.com/vite/-/vite-2.4.2.tgz#07d00615775c808530bc9f65641062b349b67929"
@@ -1513,6 +1564,18 @@ Lockfile:
       rollup "^2.38.5"
     optionalDependencies:
       fsevents "~2.3.2"
+  
+  vue-currency-input@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/vue-currency-input/-/vue-currency-input-2.0.0.tgz#c54e0df357f64f9318253e4d23a3c24676194d9f"
+    integrity sha512-y6KnBmz5Y/CIB3El94ax0UzSicaRMMjjknnSHlivMaEhOJwyw19sxXoPeUhsoG0fKYsvRpGiOqFmiqpmi1+zAA==
+    dependencies:
+      vue-demi "^0.9.0"
+  
+  vue-demi@^0.9.0:
+    version "0.9.1"
+    resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.9.1.tgz#25d6e1ebd4d4010757ff3571e2bf6a1d7bf3de82"
+    integrity sha512-7s1lufRD2l369eFWPjgLvhqCRk0XzGWJsQc7K4q+0mZtixyGIvsK1Cg88P4NcaRIEiBuuN4q1NN4SZKFKwQswA==
   
   vue-tsc@^0.0.24:
     version "0.0.24"

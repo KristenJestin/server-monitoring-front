@@ -20,7 +20,8 @@
             sm:text-sm
         "
         :class="errors ? 'ring-2 ring-red-500' : ''"
-        v-model="form[name]"
+        :value="modelValue"
+        @input="onInput"
     />
 </template>
 
@@ -29,11 +30,11 @@ import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
     props: {
-        form: {
-            type: Object,
+        name: {
+            type: String,
             required: true,
         },
-        name: {
+        modelValue: {
             type: String,
             required: true,
         },
@@ -46,9 +47,16 @@ export default defineComponent({
             required: false,
         },
     },
-    setup({ name }) {
+    setup({ name }, { emit }) {
+        const onInput = (event: any) => {
+            const target = event.target
+            const value = target.value
+            if (value && value.length) emit('update:modelValue', value)
+        }
+
         return {
             id: 'form-' + name,
+            onInput,
         }
     },
 })

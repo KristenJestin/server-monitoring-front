@@ -10,7 +10,7 @@ import '@/assets/styles/app.scss'
 // config
 InertiaProgress.init({
     // The color of the progress bar.
-    color: '#29d',
+    color: '#a855f7',
     // Whether the NProgress spinner will be shown.
     showSpinner: true,
 })

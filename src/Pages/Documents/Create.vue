@@ -7,14 +7,14 @@
                 <div>
                     <FormGroup>
                         <FormLabel label="Name" name="name" />
-                        <Input :form="form" name="name" :errors="errors?.name" />
+                        <Input name="name" v-model="form.name" :errors="errors?.name" />
                         <FormError :errors="errors?.name" />
                     </FormGroup>
                     <FormGroup>
                         <FormLabel label="Tags" name="tags" />
                         <InputDropdownMultiple
-                            :form="form"
                             name="tags"
+                            v-model="form.tags"
                             :errors="errors?.tags"
                             :options="
                                 tags.map((tag) => ({
@@ -29,12 +29,12 @@
                     </FormGroup>
                     <FormGroup>
                         <FormLabel label="File" name="file" />
-                        <InputFile :form="form" name="file" :errors="errors?.file" />
+                        <InputFile v-model="form.file" name="file" :errors="errors?.file" />
                         <FormError :errors="errors?.file" />
                     </FormGroup>
                     <FormGroup>
                         <FormLabel label="Notes" name="notes" />
-                        <InputMarkdown :form="form" name="notes" :errors="errors?.notes" />
+                        <InputMarkdown v-model="form.notes" name="notes" :errors="errors?.notes" />
                         <FormError :errors="errors?.notes" />
                     </FormGroup>
                 </div>
@@ -42,8 +42,22 @@
                 <div class="pt-3">
                     <FormGroup>
                         <FormLabel label="Reception date" name="receivedAt" />
-                        <InputDate :form="form" name="receivedAt" :errors="errors?.receivedAt" />
+                        <InputDate
+                            v-model="form.receivedAt"
+                            name="receivedAt"
+                            :errors="errors?.receivedAt"
+                        />
                         <FormError :errors="errors?.receivedAt" />
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel label="Amount" name="amount" />
+                        <InputCurrency
+                            :form="form"
+                            v-model="form['amount']"
+                            name="amount"
+                            :errors="errors?.amount"
+                        />
+                        <FormError :errors="errors?.amount" />
                     </FormGroup>
                 </div>
             </div>
@@ -76,6 +90,7 @@ import FormError from '@/components/forms/FormError.vue'
 import ErrorMessage from '@/components/ErrorMessage.vue'
 import InputMarkdown from '@/components/forms/InputMarkdown.vue'
 import InputDate from '@/components/forms/InputDate.vue'
+import InputCurrency from '@/components/forms/InputCurrency.vue'
 
 export default defineComponent({
     props: {
@@ -101,6 +116,7 @@ export default defineComponent({
         InputFile,
         InputMarkdown,
         InputDate,
+        InputCurrency,
     },
     setup() {
         // refs
@@ -112,12 +128,14 @@ export default defineComponent({
             file?: File
             notes: string
             receivedAt?: Date
+            amount?: number
         }>({
             name: '',
             tags: [],
             file: undefined,
             notes: '',
-            receivedAt: undefined,
+            receivedAt: new Date(),
+            amount: undefined,
         })
 
         // methods

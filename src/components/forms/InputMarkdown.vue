@@ -19,12 +19,11 @@
                 focus:outline-none focus:ring-2 focus:ring-primary-500
                 sm:text-sm
                 mr-2
-                transition-all
             "
             :class="errors ? 'ring-2 ring-red-500' : ''"
-            @input="update"
-            >{{ form[name] }}</textarea
-        >
+            :value="modelValue"
+            @input="onInput"
+        ></textarea>
         <div
             v-html="compiledMarkdown"
             class="
@@ -38,7 +37,6 @@
                 border
                 rounded-lg
                 shadow-md
-                transition-all
                 markdown-body
             "
         ></div>
@@ -46,18 +44,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed, onMounted } from 'vue'
+import { defineComponent, PropType, computed, ref } from 'vue'
 import Marked from 'marked'
+import DOMPurify from 'dompurify'
 
 import { debounce } from '@/utils/functions'
 
 export default defineComponent({
     props: {
-        form: {
-            type: Object,
+        name: {
+            type: String,
             required: true,
         },
-        name: {
+        modelValue: {
             type: String,
             required: true,
         },
@@ -66,20 +65,25 @@ export default defineComponent({
             required: false,
         },
     },
-    setup({ form, name }) {
-        const compiledMarkdown = computed(() => Marked(form[name], { sanitize: true }))
+    setup({ name, modelValue }, { emit }) {
+        const value = ref(modelValue)
+        const compiledMarkdown = computed(() => DOMPurify.sanitize(Marked(value.value)))
 
-        const debounceFormValue = debounce((value: string) => (form[name] = value), 300)
-        const update = (event: any) => {
+        const debounceFormValue = debounce((v: string) => {
+            emit('update:modelValue', v)
+            value.value = v
+        }, 300)
+        const onInput = (event: any) => {
             const target = event.target
-            const value = target.value
-            if (value && value.length) debounceFormValue(value)
+            const v = target.value
+            console.log('test')
+            if (v && v.length) debounceFormValue(v)
         }
 
         return {
-            compiledMarkdown,
-            update,
             id: 'form-' + name,
+            compiledMarkdown,
+            onInput,
         }
     },
 })

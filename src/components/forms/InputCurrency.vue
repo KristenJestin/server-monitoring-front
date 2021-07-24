@@ -2,7 +2,7 @@
     <input
         :id="id"
         :name="'form.' + name"
-        type="file"
+        type="text"
         class="
             flex-1
             appearance-none
@@ -20,39 +20,43 @@
             sm:text-sm
         "
         :class="errors ? 'ring-2 ring-red-500' : ''"
-        @input="onInput"
+        ref="inputRef"
+        :value="formattedValue || undefined"
     />
-    <!-- v-model="form[name]" -->
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 
+import useCurrencyInput from 'vue-currency-input'
+
 export default defineComponent({
     props: {
+        form: {
+            type: Object,
+            required: true,
+        },
         name: {
             type: String,
             required: true,
         },
-        modelValue: {
-            type: Object as PropType<File | undefined>,
-            required: false,
+        modelValue: Number,
+        type: {
+            type: String,
+            default: 'text',
         },
         errors: {
             type: Array as PropType<string[]>,
             required: false,
         },
     },
-    setup({ name }, { emit }) {
-        const onInput = (event: any) => {
-            const target = event.target
-            const files = target.files
-            if (files && files.length) emit('update:modelValue', files[0])
-        }
+    setup({ name }) {
+        const { formattedValue, inputRef } = useCurrencyInput({ currency: 'EUR' })
 
         return {
             id: 'form-' + name,
-            onInput,
+            formattedValue,
+            inputRef,
         }
     },
 })

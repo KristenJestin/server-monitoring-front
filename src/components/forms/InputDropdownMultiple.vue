@@ -1,6 +1,7 @@
 <template>
     <Multiselect
-        v-model="form[name]"
+        v-model="value"
+        ref="input"
         :options="options"
         mode="tags"
         :searchable="true"
@@ -80,19 +81,19 @@
                         color: option.textColor,
                     }"
                 >
-                    <span
+                    <XIcon
                         v-if="!disabled"
                         @click.prevent
                         @mousedown.prevent.stop="handleTagRemove(option, $event)"
                         class="
-                            bg-multiselect-remove bg-center bg-no-repeat
-                            opacity-30
+                            bg-center bg-no-repeat
                             inline-block
                             w-3
                             h-3
-                            group-hover:opacity-60
+                            opacity-70
+                            group-hover:opacity-100
                         "
-                    ></span>
+                    />
                 </span>
             </Tag>
         </template>
@@ -107,23 +108,60 @@
                 >{{ option.label }}</span
             >
         </template>
+        <template v-slot:caret>
+            <ChevronDownIcon
+                class="
+                    bg-center bg-no-repeat
+                    w-5
+                    h-5
+                    py-px
+                    box-content
+                    mr-3.5
+                    relative
+                    z-10
+                    opacity-40
+                    flex-shrink-0 flex-grow-0
+                "
+            />
+        </template>
+        <template v-slot:clear>
+            <XIcon
+                class="
+                    bg-center bg-no-repeat
+                    w-4
+                    h-4
+                    py-px
+                    box-content
+                    mr-3.5
+                    relative
+                    z-10
+                    opacity-40
+                    hover:opacity-80
+                    flex-shrink-0 flex-grow-0
+                    transition
+                    duration-300
+                "
+                @click="input.clear()"
+            />
+        </template>
     </Multiselect>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, computed } from 'vue'
+import { defineComponent, PropType, ref, watch } from 'vue'
 import Multiselect from '@vueform/multiselect'
+import { ChevronDownIcon, XIcon } from '@heroicons/vue/solid'
 
 import Tag from '@/components/Tag.vue'
 
 export default defineComponent({
     props: {
-        form: {
-            type: Object,
-            required: true,
-        },
         name: {
             type: String,
+            required: true,
+        },
+        modelValue: {
+            type: Array as PropType<String[]>,
             required: true,
         },
         options: {
@@ -135,6 +173,19 @@ export default defineComponent({
             required: false,
         },
     },
-    components: { Multiselect, Tag },
+    components: { Multiselect, Tag, ChevronDownIcon, XIcon },
+    setup({ name, modelValue }, { emit }) {
+        const input = ref()
+        const value = ref(modelValue)
+        watch(value, (v) => {
+            emit('update:modelValue', v)
+        })
+
+        return {
+            id: 'form-' + name,
+            input,
+            value,
+        }
+    },
 })
 </script>
