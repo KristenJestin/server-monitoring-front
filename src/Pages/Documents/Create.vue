@@ -12,7 +12,7 @@
                     </FormGroup>
                     <FormGroup>
                         <FormLabel label="Tags" name="tags" />
-                        <Dropdown
+                        <InputDropdownMultiple
                             :form="form"
                             name="tags"
                             :errors="errors?.tags"
@@ -29,21 +29,21 @@
                     </FormGroup>
                     <FormGroup>
                         <FormLabel label="File" name="file" />
-                        <FileInput :form="form" name="file" :errors="errors?.file" />
+                        <InputFile :form="form" name="file" :errors="errors?.file" />
                         <FormError :errors="errors?.file" />
                     </FormGroup>
                     <FormGroup>
                         <FormLabel label="Notes" name="notes" />
-                        <MarkdownInput :form="form" name="notes" :errors="errors?.notes" />
+                        <InputMarkdown :form="form" name="notes" :errors="errors?.notes" />
                         <FormError :errors="errors?.notes" />
                     </FormGroup>
                 </div>
 
                 <div class="pt-3">
                     <FormGroup>
-                        <FormLabel label="Name" name="name" />
-                        <Input :form="form" name="name" :errors="errors?.name" />
-                        <FormError :errors="errors?.name" />
+                        <FormLabel label="Reception date" name="receivedAt" />
+                        <InputDate :form="form" name="receivedAt" :errors="errors?.receivedAt" />
+                        <FormError :errors="errors?.receivedAt" />
                     </FormGroup>
                 </div>
             </div>
@@ -67,14 +67,15 @@ import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
 import { RoutesModule } from '@/plugins/routes/props'
 import TagModel from '@/models/Tag'
 import Errors from '@/models/extras/Error'
-import FormGroup from '@/components/forms/FormGroup2.vue'
-import Dropdown from '@/components/forms/DropdownMultiple.vue'
+import FormGroup from '@/components/forms/FormGroup.vue'
+import InputDropdownMultiple from '@/components/forms/InputDropdownMultiple.vue'
 import Input from '@/components/forms/Input.vue'
-import FileInput from '@/components/forms/FileInput.vue'
+import InputFile from '@/components/forms/InputFile.vue'
 import FormLabel from '@/components/forms/FormLabel.vue'
 import FormError from '@/components/forms/FormError.vue'
 import ErrorMessage from '@/components/ErrorMessage.vue'
-import MarkdownInput from '@/components/forms/MarkdownInput.vue'
+import InputMarkdown from '@/components/forms/InputMarkdown.vue'
+import InputDate from '@/components/forms/InputDate.vue'
 
 export default defineComponent({
     props: {
@@ -90,25 +91,33 @@ export default defineComponent({
     components: {
         Link,
         FormGroup,
-        Dropdown,
+        InputDropdownMultiple,
         Input,
         FormLabel,
         FormError,
         ErrorMessage,
         CheckIcon,
         SelectorIcon,
-        FileInput,
-        MarkdownInput,
+        InputFile,
+        InputMarkdown,
+        InputDate,
     },
     setup() {
         // refs
         const $routes = inject<RoutesModule>('$routes')
 
-        const form = reactive<{ name: string; tags: string[]; file?: File; notes: string }>({
+        const form = reactive<{
+            name: string
+            tags: string[]
+            file?: File
+            notes: string
+            receivedAt?: Date
+        }>({
             name: '',
             tags: [],
             file: undefined,
             notes: '',
+            receivedAt: undefined,
         })
 
         // methods

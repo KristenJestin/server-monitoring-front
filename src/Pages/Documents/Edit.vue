@@ -52,13 +52,13 @@ import { RoutesModule } from '@/plugins/routes/props'
 import DocumentModel from '@/models/Document'
 import TagModel from '@/models/Tag'
 import ErrorsModel from '@/models/extras/Error'
-import FormGroup from '@/components/forms/FormGroup2.vue'
+import FormGroup from '@/components/forms/FormGroup.vue'
 import ErrorMessage from '@/components/ErrorMessage.vue'
-import Dropdown from '@/components/forms/DropdownMultiple.vue'
+import Dropdown from '@/components/forms/InputDropdownMultiple.vue'
 import Input from '@/components/forms/Input.vue'
 import FormLabel from '@/components/forms/FormLabel.vue'
 import FormError from '@/components/forms/FormError.vue'
-import MarkdownInput from '@/components/forms/MarkdownInput.vue'
+import MarkdownInput from '@/components/forms/InputMarkdown.vue'
 
 export default defineComponent({
     props: {
