@@ -52,12 +52,21 @@
                     <FormGroup>
                         <FormLabel label="Amount" name="amount" />
                         <InputCurrency
-                            :form="form"
-                            v-model="form['amount']"
+                            v-model="form.amount"
                             name="amount"
                             :errors="errors?.amount"
                         />
                         <FormError :errors="errors?.amount" />
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel label="Duration (in months)" name="duration" />
+                        <Input
+                            name="duration"
+                            v-model="form.duration"
+                            type="number"
+                            :errors="errors?.duration"
+                        />
+                        <FormError :errors="errors?.duration" />
                     </FormGroup>
                 </div>
             </div>
@@ -73,10 +82,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, reactive, inject } from 'vue'
+import { defineComponent, PropType, reactive, inject, watch } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link, useForm } from '@inertiajs/inertia-vue3'
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
+import { addMonths, differenceInMonths } from 'date-fns'
 
 import { RoutesModule } from '@/plugins/routes/props'
 import TagModel from '@/models/Tag'
@@ -91,6 +101,7 @@ import ErrorMessage from '@/components/ErrorMessage.vue'
 import InputMarkdown from '@/components/forms/InputMarkdown.vue'
 import InputDate from '@/components/forms/InputDate.vue'
 import InputCurrency from '@/components/forms/InputCurrency.vue'
+import InputSlider from '@/components/forms/InputSlider.vue'
 
 export default defineComponent({
     props: {
@@ -117,6 +128,7 @@ export default defineComponent({
         InputMarkdown,
         InputDate,
         InputCurrency,
+        InputSlider,
     },
     setup() {
         // refs
@@ -129,6 +141,7 @@ export default defineComponent({
             notes: string
             receivedAt?: Date
             amount?: number
+            duration: number
         }>({
             name: '',
             tags: [],
@@ -136,6 +149,7 @@ export default defineComponent({
             notes: '',
             receivedAt: new Date(),
             amount: undefined,
+            duration: 0,
         })
 
         // methods

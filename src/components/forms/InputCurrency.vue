@@ -32,10 +32,6 @@ import useCurrencyInput from 'vue-currency-input'
 
 export default defineComponent({
     props: {
-        form: {
-            type: Object,
-            required: true,
-        },
         name: {
             type: String,
             required: true,

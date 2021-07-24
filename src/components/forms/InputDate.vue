@@ -6,6 +6,8 @@
             input: 'YYYY-MM-DD',
         }"
         :first-day-of-week="2"
+        :popover="{ visibility: 'focus' }"
+        @update:modelValue="onInput"
     >
         <template v-slot="{ inputValue, inputEvents, updateValue }">
             <div class="flex flex-col sm:flex-row justify-start items-center">
@@ -70,7 +72,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from 'vue'
+import { defineComponent, PropType, ref } from 'vue'
 import { DatePicker } from 'v-calendar'
 import { CalendarIcon } from '@heroicons/vue/outline'
 import { XIcon } from '@heroicons/vue/solid'
@@ -95,14 +97,15 @@ export default defineComponent({
         CalendarIcon,
         XIcon,
     },
-    setup({ modelValue, name }, { emit }) {
-        const value = ref(modelValue)
-        watch(value, (v) => {
+    setup({ name, ...props }, { emit }) {
+        const value = ref(props.modelValue)
+        const onInput = (v: Date | undefined) => {
             emit('update:modelValue', v)
-        })
+        }
 
         return {
             id: 'form-' + name,
+            onInput,
             value,
         }
     },
