@@ -11,6 +11,7 @@ interface Document {
     slug: string
     tags?: Tag[]
     notes?: string
+    file_id: string
 
     created_at: DateTime
     updated_at: DateTime

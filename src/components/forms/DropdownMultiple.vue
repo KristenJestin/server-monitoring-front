@@ -58,26 +58,12 @@
         }"
     >
         <template v-slot:tag="{ option, handleTagRemove, disabled }">
-            <div
-                class="
-                    bg-primary-500
-                    text-white text-sm
-                    font-semibold
-                    py-0.5
-                    pl-2
-                    rounded
-                    mr-1
-                    mb-1
-                    flex
-                    items-center
-                    whitespace-nowrap
-                "
-                :style="{
-                    backgroundColor: option.color,
-                    color: option.textColor,
-                }"
+            <Tag
+                :name="option.label"
+                :background-color="option.color"
+                :text-color="option.textColor"
+                extra-class="pr-0  mr-1 mb-1"
             >
-                {{ option.label }}
                 <span
                     class="
                         flex
@@ -108,7 +94,7 @@
                         "
                     ></span>
                 </span>
-            </div>
+            </Tag>
         </template>
 
         <template v-slot:option="{ option }">
@@ -127,6 +113,8 @@
 <script lang="ts">
 import { defineComponent, PropType, ref, computed } from 'vue'
 import Multiselect from '@vueform/multiselect'
+
+import Tag from '@/components/Tag.vue'
 
 export default defineComponent({
     props: {
@@ -147,6 +135,6 @@ export default defineComponent({
             required: false,
         },
     },
-    components: { Multiselect },
+    components: { Multiselect, Tag },
 })
 </script>

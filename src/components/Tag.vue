@@ -1,21 +1,24 @@
 <template>
     <div
         class="
-            text-xs
-            inline-flex
+            bg-primary-500
+            text-white text-sm
+            font-semibold
+            py-0.5
+            px-2
+            rounded
+            flex
             items-center
-            font-bold
-            leading-sm
-            uppercase
-            px-3
-            py-1
-            rounded-full
-            transition-opacity
-            hover:opacity-75
+            whitespace-nowrap
         "
-        :style="{ backgroundColor, borderColor, color: textColor }"
+        :class="extraClass"
+        :style="{
+            backgroundColor,
+            color: textColor,
+        }"
     >
         {{ name }}
+        <slot />
     </div>
 </template>
 
@@ -24,10 +27,10 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     props: {
-        name: String,
+        name: { type: String, required: true },
         backgroundColor: String,
-        borderColor: String,
         textColor: String,
+        extraClass: String,
     },
 })
 </script>

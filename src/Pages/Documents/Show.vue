@@ -12,9 +12,22 @@
             }"
         >
             {{ document.name }}
-            <ul>
-                <li v-for="tag in document.tags">{{ tag.name }}</li>
-            </ul>
+            <div class="mt-1 mb-5 flex">
+                <Tag
+                    v-for="tag in document.tags"
+                    :name="tag.name"
+                    :background-color="tag.color"
+                    :text-color="tag.text_color"
+                />
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <a
+                :href="$routes.get('documents.download', { id: document.slug })"
+                class="no-underline hover:underline text-blue-600"
+                >Lien de téléchargement</a
+            >
         </div>
     </div>
     <Modal
@@ -32,8 +45,9 @@ import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
 import { RoutesModule } from '@/plugins/routes/props'
-import DocumentModel from '@/models/Document'
 import Modal from '@/components/Modal.vue'
+import Tag from '@/components/Tag.vue'
+import DocumentModel from '@/models/Document'
 
 export default defineComponent({
     props: {
@@ -42,7 +56,7 @@ export default defineComponent({
             required: true,
         },
     },
-    components: { Link, Modal },
+    components: { Link, Modal, Tag },
     setup({ document }) {
         // refs
         const $routes = inject<RoutesModule>('$routes')
