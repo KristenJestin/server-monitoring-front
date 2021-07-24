@@ -3,38 +3,50 @@
 
     <div class="mt-10">
         <form @submit.prevent="submit">
-            <FormGroup>
-                <FormLabel label="Name" name="name" />
-                <Input :form="form" name="name" :errors="errors?.name" />
-                <FormError :errors="errors?.name" />
-            </FormGroup>
-            <FormGroup>
-                <FormLabel label="Tags" name="tags" />
-                <Dropdown
-                    :form="form"
-                    name="tags"
-                    :errors="errors?.tags"
-                    :options="
-                        tags.map((tag) => ({
-                            label: tag.name,
-                            value: tag.name,
-                            color: tag.color,
-                            textColor: tag.text_color,
-                        }))
-                    "
-                />
-                <FormError :errors="errors?.tags" />
-            </FormGroup>
-            <FormGroup>
-                <FormLabel label="File" name="file" />
-                <FileInput :form="form" name="file" :errors="errors?.file" />
-                <FormError :errors="errors?.file" />
-            </FormGroup>
-            <FormGroup>
-                <FormLabel label="Notes" name="notes" />
-                <MarkdownInput :form="form" name="notes" :errors="errors?.notes" />
-                <FormError :errors="errors?.notes" />
-            </FormGroup>
+            <div class="grid grid-cols-1 divide-y-2 divide-gray-300">
+                <div>
+                    <FormGroup>
+                        <FormLabel label="Name" name="name" />
+                        <Input :form="form" name="name" :errors="errors?.name" />
+                        <FormError :errors="errors?.name" />
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel label="Tags" name="tags" />
+                        <Dropdown
+                            :form="form"
+                            name="tags"
+                            :errors="errors?.tags"
+                            :options="
+                                tags.map((tag) => ({
+                                    label: tag.name,
+                                    value: tag.name,
+                                    color: tag.color,
+                                    textColor: tag.text_color,
+                                }))
+                            "
+                        />
+                        <FormError :errors="errors?.tags" />
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel label="File" name="file" />
+                        <FileInput :form="form" name="file" :errors="errors?.file" />
+                        <FormError :errors="errors?.file" />
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel label="Notes" name="notes" />
+                        <MarkdownInput :form="form" name="notes" :errors="errors?.notes" />
+                        <FormError :errors="errors?.notes" />
+                    </FormGroup>
+                </div>
+
+                <div class="pt-3">
+                    <FormGroup>
+                        <FormLabel label="Name" name="name" />
+                        <Input :form="form" name="name" :errors="errors?.name" />
+                        <FormError :errors="errors?.name" />
+                    </FormGroup>
+                </div>
+            </div>
 
             <div class="mt-6">
                 <Link :href="$routes.get('documents.index')" class="btn btn-muted mr-5"
