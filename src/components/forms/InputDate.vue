@@ -7,6 +7,7 @@
         }"
         :first-day-of-week="2"
         :popover="{ visibility: 'focus' }"
+        :max-date="max"
         @update:modelValue="onInput"
     >
         <template v-slot="{ inputValue, inputEvents, updateValue }">
@@ -90,6 +91,10 @@ export default defineComponent({
         errors: {
             type: Array as PropType<string[]>,
             required: false,
+        },
+        max: {
+            type: Date,
+            default: undefined,
         },
     },
     components: {

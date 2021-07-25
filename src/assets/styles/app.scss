@@ -10,7 +10,7 @@
     }
 
     &.btn-muted {
-        @apply bg-white text-gray-700  hover:bg-gray-50  focus:ring-gray-400;
+        @apply bg-gray-700 text-white  hover:bg-gray-800  focus:ring-gray-900;
     }
 
     &.btn-danger {

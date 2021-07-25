@@ -46,6 +46,7 @@
                             v-model="form.receivedAt"
                             name="receivedAt"
                             :errors="errors?.receivedAt"
+                            :max="new Date()"
                         />
                         <FormError :errors="errors?.receivedAt" />
                     </FormGroup>
@@ -141,7 +142,7 @@ export default defineComponent({
             notes: string
             receivedAt?: Date
             amount?: number
-            duration: number
+            duration?: number
         }>({
             name: '',
             tags: [],
@@ -149,7 +150,7 @@ export default defineComponent({
             notes: '',
             receivedAt: new Date(),
             amount: undefined,
-            duration: 0,
+            duration: undefined,
         })
 
         // methods

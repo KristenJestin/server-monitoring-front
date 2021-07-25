@@ -35,7 +35,7 @@ export default defineComponent({
             required: true,
         },
         modelValue: {
-            type: [String, Number] as PropType<string | number>,
+            type: [String, Number] as PropType<string | number | undefined>,
             required: true,
         },
         type: {
