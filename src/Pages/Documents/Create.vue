@@ -142,7 +142,7 @@ export default defineComponent({
             notes: string
             receivedAt?: Date
             amount?: number
-            duration?: number
+            duration: number | string
         }>({
             name: '',
             tags: [],
@@ -150,7 +150,7 @@ export default defineComponent({
             notes: '',
             receivedAt: new Date(),
             amount: undefined,
-            duration: undefined,
+            duration: '',
         })
 
         // methods

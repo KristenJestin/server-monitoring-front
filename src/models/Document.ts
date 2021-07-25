@@ -12,6 +12,9 @@ interface Document {
     tags?: Tag[]
     notes?: string
     file_id: string
+    received_at?: string
+    amount?: string
+    duration?: number
 
     created_at: DateTime
     updated_at: DateTime
