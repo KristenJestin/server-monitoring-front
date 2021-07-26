@@ -29,6 +29,22 @@
                         <FormError :errors="errors?.tags" />
                     </FormGroup>
                     <FormGroup>
+                        <FormLabel label="Folder" name="folderId" />
+                        <InputDropdownMultiple
+                            name="folderId"
+                            mode="single"
+                            v-model="form.folderId"
+                            :errors="errors?.folder_id"
+                            :options="
+                                folders.map((folder) => ({
+                                    label: folder.name,
+                                    value: folder.id,
+                                }))
+                            "
+                        />
+                        <FormError :errors="errors?.folder_id" />
+                    </FormGroup>
+                    <FormGroup>
                         <FormLabel label="File" name="file" />
                         <InputFile v-model="form.file" name="file" :errors="errors?.file" />
                         <FormError :errors="errors?.file" />
@@ -88,10 +104,10 @@ import { defineComponent, PropType, reactive, inject, watch } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link, useForm } from '@inertiajs/inertia-vue3'
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
-import { addMonths, differenceInMonths } from 'date-fns'
 
 import { RoutesModule } from '@/plugins/routes/props'
 import TagModel from '@/models/Tag'
+import FolderModel from '@/models/Folder'
 import Errors from '@/models/extras/Error'
 import FormGroup from '@/components/forms/FormGroup.vue'
 import InputDropdownMultiple from '@/components/forms/InputDropdown.vue'
@@ -114,6 +130,10 @@ export default defineComponent({
         tags: {
             type: Object as PropType<TagModel[]>,
             required: true,
+        },
+        folders: {
+            type: Object as PropType<FolderModel[]>,
+            default: [],
         },
     },
     components: {
@@ -144,6 +164,7 @@ export default defineComponent({
             receivedAt?: Date
             amount?: number
             duration: number | string
+            folderId?: string
         }>({
             name: '',
             tags: [],
@@ -152,6 +173,7 @@ export default defineComponent({
             receivedAt: new Date(),
             amount: undefined,
             duration: '',
+            folderId: undefined,
         })
 
         // methods

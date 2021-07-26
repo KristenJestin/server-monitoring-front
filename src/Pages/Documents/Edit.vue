@@ -29,6 +29,22 @@
                         <FormError :errors="errors?.tags" />
                     </FormGroup>
                     <FormGroup>
+                        <FormLabel label="Folder" name="folderId" />
+                        <InputDropdownMultiple
+                            name="folderId"
+                            mode="single"
+                            v-model="form.folderId"
+                            :errors="errors?.folder_id"
+                            :options="
+                                folders.map((folder) => ({
+                                    label: folder.name,
+                                    value: folder.id,
+                                }))
+                            "
+                        />
+                        <FormError :errors="errors?.folder_id" />
+                    </FormGroup>
+                    <FormGroup>
                         <FormLabel label="Notes" name="notes" />
                         <InputMarkdown v-model="form.notes" name="notes" :errors="errors?.notes" />
                         <FormError :errors="errors?.notes" />
@@ -88,6 +104,7 @@ import { DateTime } from 'luxon'
 import { RoutesModule } from '@/plugins/routes/props'
 import TagModel from '@/models/Tag'
 import DocumentModel from '@/models/Document'
+import FolderModel from '@/models/Folder'
 import ErrorsModel from '@/models/extras/Error'
 import FormGroup from '@/components/forms/FormGroup.vue'
 import InputDropdownMultiple from '@/components/forms/InputDropdown.vue'
@@ -114,6 +131,10 @@ export default defineComponent({
         errors: {
             type: Object as PropType<ErrorsModel>,
             required: false,
+        },
+        folders: {
+            type: Object as PropType<FolderModel[]>,
+            default: [],
         },
     },
     components: {
@@ -143,6 +164,7 @@ export default defineComponent({
             receivedAt?: Date
             amount?: number
             duration?: number
+            folderId?: string
         }>({
             name: document.name || '',
             tags: document.tags?.map((tag) => tag.name) || [],
@@ -152,6 +174,7 @@ export default defineComponent({
                 : undefined,
             amount: document.amount ? parseFloat(document.amount) : undefined,
             duration: document.duration,
+            folderId: document.folder?.id,
         })
 
         // methods

@@ -29,13 +29,12 @@
                 <InputDropdownMultiple
                     name="parent_id"
                     mode="single"
-                    v-model="form.parent_id"
+                    v-model="form.parentId"
                     :errors="errors?.parent_id"
                     :options="
                         folders.map((folder) => ({
                             label: folder.name,
                             value: folder.id,
-                            color: folder.color,
                         }))
                     "
                 />
@@ -91,11 +90,11 @@ export default defineComponent({
         const form = reactive<{
             name: string
             color?: string
-            parent_id?: string
+            parentId?: string
         }>({
             name: '',
             color: '',
-            parent_id: undefined,
+            parentId: undefined,
         })
 
         // methods
