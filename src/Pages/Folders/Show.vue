@@ -1,38 +1,37 @@
 <template>
     <div class="mb-10 flex justify-end">
-        <button class="btn btn-danger mr-4" @click="deleteButtonPress">Delete</button>
-        <Link :href="$routes.get('folders.edit', { id: folder.slug })" class="btn btn-muted"
-            >Edit</Link
-        >
+        <Link href="/folders/create" class="btn btn-primary">Create</Link>
     </div>
-    <div>
-        <div
-            :style="{
-                backgroundColor: folder.color,
-                color: folder.text_color,
-                marginBottom: '20px',
-            }"
-        >
-            {{ folder.name }}
+    <div v-if="[...folders, ...documents].length">
+        <div v-for="folder in folders" class="block m-5">
+            <Link class="flex" :href="$routes.get('folders.show', { id: folder.slug })">
+                <FolderIcon class="h-6 w-6" />
+                <span class="ml-2">{{ folder.name }}</span>
+            </Link>
+        </div>
+        <div v-for="document in documents" class="block m-5">
+            <Link :href="$routes.get('documents.show', { id: document.slug })" class="flex">
+                <DocumentIcon class="h-6 w-6" />
+                <span class="ml-2">{{ document.name }}</span>
+            </Link>
         </div>
     </div>
-    <Modal
-        v-model:open="modalOpen"
-        :action="destroy"
-        title="Delete Folder"
-        :message="`Are you sure you want to delete the folder '${folder.name}' ? All of your data will be permanently removed. This action cannot be undone.`"
-        button="Delete"
-    />
+    <div v-else>
+        <i class="italic">empty folder ...</i>
+    </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, inject } from 'vue'
-import { Inertia } from '@inertiajs/inertia'
+import { defineComponent, PropType } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
+import {
+    FolderIcon,
+    FolderOpenIcon,
+    DocumentTextIcon as DocumentIcon,
+} from '@heroicons/vue/outline'
 
-import { RoutesModule } from '@/plugins/routes/props'
 import FolderModel from '@/models/Folder'
-import Modal from '@/components/Modal.vue'
+import DocumentModel from '@/models/Document'
 
 export default defineComponent({
     props: {
@@ -40,27 +39,15 @@ export default defineComponent({
             type: Object as PropType<FolderModel>,
             required: true,
         },
+        folders: {
+            type: Object as PropType<FolderModel[]>,
+            default: [],
+        },
+        documents: {
+            type: Object as PropType<DocumentModel[]>,
+            default: [],
+        },
     },
-    components: { Link, Modal },
-    setup({ folder }) {
-        // refs
-        const $routes = inject<RoutesModule>('$routes')
-        const modalOpen = ref(false)
-
-        // methods
-        const deleteButtonPress = () => {
-            modalOpen.value = true
-        }
-        const destroy = () => {
-            Inertia.delete($routes?.get('folders.destroy', { id: folder.slug }) || '')
-        }
-
-        // return
-        return {
-            destroy,
-            deleteButtonPress,
-            modalOpen,
-        }
-    },
+    components: { Link, FolderIcon, FolderOpenIcon, DocumentIcon },
 })
 </script>

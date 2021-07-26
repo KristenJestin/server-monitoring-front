@@ -1,6 +1,7 @@
 // main
 interface RoutesModule {
     get: (name: string, params?: Record<string, string | number>) => string
+    getWithWildcard: (name: string, params?: string[]) => string
 }
 
 interface RouteElement {
