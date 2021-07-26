@@ -14,6 +14,7 @@
                         <FormLabel label="Tags" name="tags" />
                         <InputDropdownMultiple
                             name="tags"
+                            mode="tags"
                             v-model="form.tags"
                             :errors="errors?.tags"
                             :options="
@@ -93,7 +94,7 @@ import { RoutesModule } from '@/plugins/routes/props'
 import TagModel from '@/models/Tag'
 import Errors from '@/models/extras/Error'
 import FormGroup from '@/components/forms/FormGroup.vue'
-import InputDropdownMultiple from '@/components/forms/InputDropdownMultiple.vue'
+import InputDropdownMultiple from '@/components/forms/InputDropdown.vue'
 import Input from '@/components/forms/Input.vue'
 import InputFile from '@/components/forms/InputFile.vue'
 import FormLabel from '@/components/forms/FormLabel.vue'
