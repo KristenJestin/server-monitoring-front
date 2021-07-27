@@ -48,7 +48,7 @@ import { defineComponent, PropType, computed, ref } from 'vue'
 import Marked from 'marked'
 import DOMPurify from 'dompurify'
 
-import { debounce } from '@/utils/functions'
+import { throttle } from '@/utils/functions'
 
 export default defineComponent({
     props: {
@@ -69,7 +69,7 @@ export default defineComponent({
         const value = ref(modelValue)
         const compiledMarkdown = computed(() => DOMPurify.sanitize(Marked(value.value)))
 
-        const debounceFormValue = debounce((v: string) => {
+        const debounceFormValue = throttle((v: string) => {
             emit('update:modelValue', v)
             value.value = v
         }, 300)

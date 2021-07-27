@@ -12,5 +12,20 @@ function debounce<Params extends any[]>(
     }
 }
 
+function throttle<Params extends any[]>(func: (...args: Params) => any, timeout: number) {
+    let shouldWait = false
+
+    return (...args: Params) => {
+        if (!shouldWait) {
+            func(...args)
+            shouldWait = true
+            setTimeout(() => (shouldWait = false), timeout)
+        }
+    }
+}
+
+const nonEmpty = (element: any) =>
+    Object.entries(element).filter(([_, value]: [string, any]) => value && value.length)
+
 // exports
-export { debounce }
+export { debounce, throttle, nonEmpty }

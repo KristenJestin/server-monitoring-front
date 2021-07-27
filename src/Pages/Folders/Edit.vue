@@ -26,7 +26,7 @@
             </FormGroup>
             <FormGroup>
                 <FormLabel label="Parent" name="parent_id" />
-                <InputDropdownMultiple
+                <InputDropdown
                     name="parent_id"
                     mode="single"
                     v-model="form.parentId"
@@ -58,7 +58,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 import { RoutesModule } from '@/plugins/routes/props'
 import ErrorsModel from '@/models/extras/Error'
 import FormGroup from '@/components/forms/FormGroup.vue'
-import InputDropdownMultiple from '@/components/forms/InputDropdown.vue'
+import InputDropdown from '@/components/forms/InputDropdown.vue'
 import Input from '@/components/forms/Input.vue'
 import FormLabel from '@/components/forms/FormLabel.vue'
 import FormError from '@/components/forms/FormError.vue'
@@ -87,7 +87,7 @@ export default defineComponent({
         Input,
         FormLabel,
         FormError,
-        InputDropdownMultiple,
+        InputDropdown,
     },
     setup({ folder }) {
         // refs

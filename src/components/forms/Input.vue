@@ -51,7 +51,7 @@ export default defineComponent({
         const onInput = (event: any) => {
             const target = event.target
             const value = target.value
-            if (value && value.length) emit('update:modelValue', value)
+            if (value !== undefined) emit('update:modelValue', value)
         }
 
         return {

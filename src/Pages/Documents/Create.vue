@@ -12,7 +12,7 @@
                     </FormGroup>
                     <FormGroup>
                         <FormLabel label="Tags" name="tags" />
-                        <InputDropdownMultiple
+                        <InputDropdown
                             name="tags"
                             mode="tags"
                             v-model="form.tags"
@@ -30,7 +30,7 @@
                     </FormGroup>
                     <FormGroup>
                         <FormLabel label="Folder" name="folderId" />
-                        <InputDropdownMultiple
+                        <InputDropdown
                             name="folderId"
                             mode="single"
                             v-model="form.folderId"
@@ -110,7 +110,7 @@ import TagModel from '@/models/Tag'
 import FolderModel from '@/models/Folder'
 import Errors from '@/models/extras/Error'
 import FormGroup from '@/components/forms/FormGroup.vue'
-import InputDropdownMultiple from '@/components/forms/InputDropdown.vue'
+import InputDropdown from '@/components/forms/InputDropdown.vue'
 import Input from '@/components/forms/Input.vue'
 import InputFile from '@/components/forms/InputFile.vue'
 import FormLabel from '@/components/forms/FormLabel.vue'
@@ -139,7 +139,7 @@ export default defineComponent({
     components: {
         Link,
         FormGroup,
-        InputDropdownMultiple,
+        InputDropdown,
         Input,
         FormLabel,
         FormError,
