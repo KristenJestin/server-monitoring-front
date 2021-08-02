@@ -19,7 +19,12 @@ InertiaProgress.init({
 createInertiaApp({
     resolve: async (name) => {
         const page = await import(`./Pages/${name}.vue`).then((module) => module.default)
-        page.layout = page.layout || Layout
+
+        if (page.layout === undefined) {
+            const breadcrumb = page.breadcrumb
+            page.layout = h(Layout, { breadcrumb }, () => page)
+        }
+
         return page
     },
     setup({ el, app, props, plugin }) {

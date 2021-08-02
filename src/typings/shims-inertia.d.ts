@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { Inertia, Page } from '@inertiajs/inertia'
 
 declare module '@vue/runtime-core' {
@@ -6,10 +5,8 @@ declare module '@vue/runtime-core' {
         $inertia: typeof Inertia
         $page: Page
     }
-}
 
-declare module 'vue/types/options' {
-    interface ComponentOptions<V extends typeof Vue> {
+    export interface ComponentCustomOptions {
         layout?: any
     }
 }

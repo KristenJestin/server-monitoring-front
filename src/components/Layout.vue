@@ -1,15 +1,11 @@
 <template>
     <div>
-        <nav class="bg-gray-800 fixed w-full z-10 top-0">
+        <nav class="bg-gray-800 dark:bg-gray-900 fixed w-full z-10 top-0 shadow-lg">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <img
-                                class="h-8 w-8"
-                                src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                                alt="Workflow"
-                            />
+                        <div class="flex-shrink-0 text-white">
+                            <Link :href="$routes.get('home')"><Logo /></Link>
                         </div>
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
@@ -26,8 +22,8 @@
                                         font-medium
                                     "
                                     :class="{
-                                        'bg-gray-900 text-white':
-                                            $page.component.startsWith('Drives'),
+                                        'bg-gray-900 text-white dark:bg-gray-800':
+                                            $page.url.startsWith(item.href),
                                     }"
                                     >{{ item.name }}</Link
                                 >
@@ -109,6 +105,7 @@
         </nav>
 
         <main class="mt-16">
+            <Breadcrumb :items="breadcrumb" />
             <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                 <slot />
             </div>
@@ -136,8 +133,11 @@ import { defineComponent, PropType, inject } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 
 import { RoutesModule } from '@/plugins/routes/props'
-import Alert from '@/components/Alert.vue'
+import BreadcrumbItem from '@/models/extras/BreadcrumbItem'
 import AlertModel from '@/models/extras/Alert'
+import Logo from '@/components/Logo.vue'
+import Alert from '@/components/Alert.vue'
+import Breadcrumb from '@/components/Breadcrumb.vue'
 
 export default defineComponent({
     props: {
@@ -145,8 +145,12 @@ export default defineComponent({
             type: Object as PropType<AlertModel>,
             required: false,
         },
+        breadcrumb: {
+            type: Array as PropType<BreadcrumbItem[]>,
+            default: [],
+        },
     },
-    components: { Alert, Link },
+    components: { Alert, Link, Logo, Breadcrumb },
     setup() {
         // refs
         const $routes = inject<RoutesModule>('$routes')

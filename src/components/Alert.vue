@@ -9,7 +9,7 @@
             bg-white
             rounded-lg
             shadow-md
-            dark:bg-gray-800
+            dark:bg-gray-700
         "
         v-show="open"
     >
