@@ -19,12 +19,22 @@
             <h4 class="text-lg upperace font-bold">Disks</h4>
             <div v-if="disks?.length">
                 <div v-for="disk in disks" class="block">
-                    <div>
-                        {{ disk._mounted }} <small class="text-sm">({{ disk._filesystem }})</small>
-                        <div class="ml-2 font-bold inline-block">{{ disk._capacity }}</div>
+                    <div class="flex">
+                        <div>
+                            {{ disk._mounted }}
+                            <small class="text-sm">({{ disk._filesystem }})</small>
+                        </div>
+                        <div class="ml-auto font-bold inline-block">
+                            <small class="text-sm"
+                                >({{ humanFileSize(disk._used) }}/{{
+                                    humanFileSize(disk._blocks)
+                                }})</small
+                            >
+                            {{ disk._capacity }}
+                        </div>
                     </div>
                     <div class="relative pt-1">
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-primary-300">
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-primary-200">
                             <div
                                 :style="{ width: disk._capacity }"
                                 class="
@@ -34,8 +44,11 @@
                                     whitespace-nowrap
                                     text-white
                                     justify-center
-                                    bg-primary-500
                                 "
+                                :class="{
+                                    'bg-primary-500': (disk._used * 100) / disk._blocks <= 85,
+                                    'bg-red-500': (disk._used * 100) / disk._blocks > 85,
+                                }"
                             ></div>
                         </div>
                     </div>
@@ -50,9 +63,9 @@
 import { defineComponent, PropType } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 
-import Layout from '@/components/Layout.vue'
 import DriveModel from '@/models/Drive'
 import DiskModel from '@/models/Disk'
+import { humanFileSize } from '@/utils/readable'
 import Title from '@/components/Title.vue'
 import Card from '@/components/Card.vue'
 
@@ -69,5 +82,10 @@ export default defineComponent({
         },
     },
     components: { Link, Title, Card },
+    setup() {
+        return {
+            humanFileSize,
+        }
+    },
 })
 </script>

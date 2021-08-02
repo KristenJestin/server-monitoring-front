@@ -1,12 +1,12 @@
 <template>
     <div>
-        <div class="mb-4 flex justify-between items-center">
+        <div class="mb-4 flex justify-between items-center px-4 sm:px-0">
             <Title :name="title" />
             <div>
                 <slot name="title-right-part" />
             </div>
         </div>
-        <div class="mt-8 relative w-full max-w-full lg:max-w-6xl xl:max-w-screen-2xl mx-auto">
+        <div class="mt-8 relative w-full max-w-full mx-auto">
             <div
                 class="
                     absolute
@@ -19,6 +19,7 @@
                     transform
                     -skew-y-6
                     sm:skew-y-0 sm:rotate-2 sm:rounded-3xl
+                    max-w-full
                 "
             ></div>
             <div class="relative bg-white dark:bg-gray-600 shadow-lg sm:rounded-3xl">
