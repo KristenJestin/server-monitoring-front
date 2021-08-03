@@ -18,7 +18,10 @@ const plugin = {
     },
 }
 
-const get = (name: string, params: Record<string, string | number> | undefined = undefined) => {
+const get = (
+    name: string,
+    params: Record<string, string | number | undefined> | undefined = undefined
+) => {
     // find route with name
     const route = getRouteUrl(name)
 
@@ -27,7 +30,7 @@ const get = (name: string, params: Record<string, string | number> | undefined =
     if (params && Object.keys(params).length > 0) {
         // replace all params
         for (const [key, value] of Object.entries(params)) {
-            url = url.replace(new RegExp(`:${key}`, 'gi'), value.toString())
+            url = url.replace(new RegExp(`:${key}`, 'gi'), value?.toString() || '')
         }
     }
 

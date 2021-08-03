@@ -8,6 +8,9 @@
     &.btn-primary {
         @apply bg-primary-500 text-white  hover:bg-primary-600  focus:ring-primary-400;
     }
+    &.btn-primary-light {
+        @apply bg-primary-100 text-primary-500  hover:bg-primary-500 hover:text-white  focus:ring-primary-400;
+    }
 
     &.btn-muted {
         @apply bg-gray-700 text-white  hover:bg-gray-800  focus:ring-gray-900 dark:bg-gray-500 dark:hover:bg-gray-700;

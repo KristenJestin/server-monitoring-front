@@ -41,6 +41,7 @@
                                             p-2
                                             rounded-full
                                             focus:bg-gray-600
+                                            transition-colors
                                         "
                                         @click.prevent="changeDarkMode(!dark)"
                                     >
@@ -51,7 +52,7 @@
                                     </button>
                                 </div>
                                 <div class="ml-4 flex items-center md:ml-6">
-                                    <button href="/drives/create" class="btn btn-primary">
+                                    <button href="/drives/create" class="btn btn-primary-light">
                                         Login
                                     </button>
                                 </div>

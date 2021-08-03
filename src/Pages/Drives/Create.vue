@@ -1,41 +1,39 @@
 <template>
     <Card title="Create new Drive">
-        <div class="mb-2" v-if="errors"><ErrorMessage /></div>
+        <div class="mb-5" v-if="errors"><ErrorMessage /></div>
 
-        <div class="mt-10">
-            <form @submit.prevent="submit">
-                <FormGroup>
-                    <FormLabel label="Name" name="name" />
-                    <Input name="name" v-model="form.name" :errors="errors?.name" />
-                    <FormError :errors="errors?.name" />
-                </FormGroup>
-                <FormGroup>
-                    <FormLabel label="Filesystem" name="mounted" />
-                    <InputDropdown
-                        name="mounted"
-                        mode="single"
-                        v-model="form.mounted"
-                        :errors="errors?.mounted"
-                        :options="
-                            mounteds.map((mounted) => ({
-                                label: mounted,
-                                value: mounted,
-                            }))
-                        "
-                    />
-                    <FormError :errors="errors?.mounted" />
-                </FormGroup>
+        <form @submit.prevent="submit">
+            <FormGroup>
+                <FormLabel label="Name" name="name" />
+                <Input name="name" v-model="form.name" :errors="errors?.name" />
+                <FormError :errors="errors?.name" />
+            </FormGroup>
+            <FormGroup>
+                <FormLabel label="Filesystem" name="mounted" />
+                <InputDropdown
+                    name="mounted"
+                    mode="single"
+                    v-model="form.mounted"
+                    :errors="errors?.mounted"
+                    :options="
+                        mounteds.map((mounted) => ({
+                            label: mounted,
+                            value: mounted,
+                        }))
+                    "
+                />
+                <FormError :errors="errors?.mounted" />
+            </FormGroup>
 
-                <div class="flex mt-6">
-                    <div>
-                        <Link :href="$routes.get('drives.index')" class="btn btn-muted mr-5"
-                            >Cancel</Link
-                        >
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+            <div class="flex mt-6">
+                <div>
+                    <Link :href="$routes.get('drives.index')" class="btn btn-muted mr-5"
+                        >Cancel</Link
+                    >
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </Card>
 </template>
 

@@ -6,7 +6,7 @@ interface Drive {
     id: string
     name: string
     slug: string
-    size: string
+    mounted: string
     created_at: DateTime
     updated_at: DateTime
 }
