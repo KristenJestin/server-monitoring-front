@@ -3,7 +3,7 @@
         <div class="mb-4 flex justify-between items-center px-4 sm:px-0">
             <Title :name="title" />
             <div>
-                <slot name="title-right-part" />
+                <slot name="title-right-part"></slot>
             </div>
         </div>
         <div class="mt-8 relative w-full max-w-full mx-auto">

@@ -5,38 +5,27 @@
         </template>
 
         <div>
-            <h4 class="text-lg upperace font-bold">Enabled</h4>
             <div v-if="drives?.length">
                 <div v-for="drive in drives" class="block">
-                    <Link :href="$routes.get('drives.show', { id: drive.slug })">
-                        <p>{{ drive.name }}</p>
-                    </Link>
-                </div>
-            </div>
-            <div v-else class="text-gray-400 dark:text-gray-300 italic">no drive ...</div>
-        </div>
-        <div class="mt-5">
-            <h4 class="text-lg upperace font-bold">Disks</h4>
-            <div v-if="disks?.length">
-                <div v-for="disk in disks" class="block">
                     <div class="flex">
                         <div>
-                            {{ disk._mounted }}
-                            <small class="text-sm">({{ disk._filesystem }})</small>
+                            <Tooltip :message="drive.filesystem">
+                                {{ drive.name || drive.mounted }}
+                            </Tooltip>
                         </div>
                         <div class="ml-auto font-bold inline-block">
                             <small class="text-sm"
-                                >({{ humanFileSize(disk._used) }}/{{
-                                    humanFileSize(disk._blocks)
+                                >({{ humanFileSize(drive.used) }}/{{
+                                    humanFileSize(drive.blocks)
                                 }})</small
                             >
-                            {{ disk._capacity }}
+                            {{ drive.capacity }}
                         </div>
                     </div>
                     <div class="relative pt-1">
                         <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-primary-200">
                             <div
-                                :style="{ width: disk._capacity }"
+                                :style="{ width: drive.capacity }"
                                 class="
                                     shadow-none
                                     flex flex-col
@@ -46,15 +35,15 @@
                                     justify-center
                                 "
                                 :class="{
-                                    'bg-primary-500': (disk._used * 100) / disk._blocks <= 85,
-                                    'bg-red-500': (disk._used * 100) / disk._blocks > 85,
+                                    'bg-primary-500': (drive.used * 100) / drive.blocks <= 85,
+                                    'bg-red-500': (drive.used * 100) / drive.blocks > 85,
                                 }"
                             ></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div v-else class="text-gray-400 italic">no disk ...</div>
+            <div v-else class="text-gray-400 italic">no drive ...</div>
         </div>
     </Card>
 </template>
@@ -63,25 +52,21 @@
 import { defineComponent, PropType } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 
-import DriveModel from '@/models/Drive'
-import DiskModel from '@/models/Disk'
+import DriveInfoModel from '@/models/DriveInfo'
 import { humanFileSize } from '@/utils/readable'
 import Title from '@/components/Title.vue'
 import Card from '@/components/Card.vue'
+import Tooltip from '@/components/Tooltip.vue'
 
 export default defineComponent({
     breadcrumb: [{ name: 'Drives', page: 'drives.index' }],
     props: {
         drives: {
-            type: Object as PropType<DriveModel[]>,
-            default: [],
-        },
-        disks: {
-            type: Object as PropType<DiskModel[]>,
+            type: Object as PropType<DriveInfoModel[]>,
             default: [],
         },
     },
-    components: { Link, Title, Card },
+    components: { Link, Title, Card, Tooltip },
     setup() {
         return {
             humanFileSize,

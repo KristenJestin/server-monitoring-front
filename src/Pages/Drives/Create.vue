@@ -10,20 +10,20 @@
                     <FormError :errors="errors?.name" />
                 </FormGroup>
                 <FormGroup>
-                    <FormLabel label="Filesystem" name="filesystem" />
+                    <FormLabel label="Filesystem" name="mounted" />
                     <InputDropdown
-                        name="folderId"
+                        name="mounted"
                         mode="single"
-                        v-model="form.filesystem"
-                        :errors="errors?.filesystem"
+                        v-model="form.mounted"
+                        :errors="errors?.mounted"
                         :options="
-                            filesystems.map((filesystem) => ({
-                                label: filesystem,
-                                value: filesystem,
+                            mounteds.map((mounted) => ({
+                                label: mounted,
+                                value: mounted,
                             }))
                         "
                     />
-                    <FormError :errors="errors?.filesystem" />
+                    <FormError :errors="errors?.mounted" />
                 </FormGroup>
 
                 <div class="flex mt-6">
@@ -60,7 +60,7 @@ export default defineComponent({
         { name: 'Create', page: 'drives.create' },
     ],
     props: {
-        filesystems: {
+        mounteds: {
             type: Array as PropType<string[]>,
             default: [],
         },
@@ -73,9 +73,9 @@ export default defineComponent({
     setup() {
         // refs
         const $routes = inject<RoutesModule>('$routes')
-        const form = reactive<{ name: string; filesystem: string }>({
+        const form = reactive<{ name: string; mounted: string }>({
             name: '',
-            filesystem: '',
+            mounted: '',
         })
 
         // methods
