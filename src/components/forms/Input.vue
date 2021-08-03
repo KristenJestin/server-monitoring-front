@@ -10,9 +10,8 @@
             bg-white
             text-gray-700
             placeholder-gray-400
-            dark:bg-gray-700 dark:text-gray-100
             border border-gray-100
-            dark:border-gray-800
+            dark:bg-gray-700 dark:text-gray-100 dark:border-gray-800
             rounded-lg
             shadow-md
             px-4

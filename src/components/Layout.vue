@@ -188,6 +188,10 @@ export default defineComponent({
                 name: 'Drives',
                 href: $routes!.get('drives.index'),
             },
+            {
+                name: 'Applications',
+                href: $routes!.get('applications.index'),
+            },
         ]
 
         // return
