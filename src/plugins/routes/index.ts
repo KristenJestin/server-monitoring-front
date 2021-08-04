@@ -30,12 +30,16 @@ const get = (
     if (params && Object.keys(params).length > 0) {
         // replace all params
         for (const [key, value] of Object.entries(params)) {
-            url = url.replace(new RegExp(`:${key}`, 'gi'), value?.toString() || '')
+            url = url.replace(new RegExp(`:${key}\\??`, 'gi'), value?.toString() || '')
         }
     }
 
+    // remove optional params
+    const segments = url.split('/')
+    const paramsSegments = segments.filter((s) => !s.startsWith(':') && !s.endsWith('?'))
+
     // return
-    return url
+    return paramsSegments.join('/')
 }
 
 const getWithWildcard = (name: string, params: string[] = []) => {

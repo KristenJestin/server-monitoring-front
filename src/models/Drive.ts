@@ -1,14 +1,11 @@
-// imports
-import { DateTime } from 'luxon'
-
 // main
 interface Drive {
     id: string
     name: string
     slug: string
     mounted: string
-    created_at: DateTime
-    updated_at: DateTime
+    created_at: string
+    updated_at: string
 }
 
 // exports

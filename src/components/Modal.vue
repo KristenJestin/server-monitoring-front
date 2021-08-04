@@ -32,9 +32,9 @@
                         fixed
                         inset-0
                         bg-gray-500
-                        dark:bg-gray-800
+                        dark:bg-gray-900
                         bg-opacity-75
-                        dark:bg-opacity-75
+                        dark:bg-opacity-90
                         transition-opacity
                     "
                     aria-hidden="true"

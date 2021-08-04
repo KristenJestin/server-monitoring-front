@@ -23,7 +23,7 @@
                 "
             ></div>
             <div class="relative bg-gray-50 dark:bg-gray-600 shadow-lg sm:rounded-3xl">
-                <div class="px-20 py-6">
+                <div class="px-6 md:px-20 py-6">
                     <slot />
                 </div>
             </div>

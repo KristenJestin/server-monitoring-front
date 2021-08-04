@@ -3,33 +3,72 @@
         <div class="mb-5" v-if="errors"><ErrorMessage /></div>
 
         <form @submit.prevent="submit">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-8 mb-0 md:mb-5">
+                <FormGroup class="col-span-2 md:mb-0">
+                    <FormLabel label="Name" name="name" />
+                    <Input name="name" v-model="form.name" :errors="errors?.name" />
+                    <FormError :errors="errors?.name" />
+                </FormGroup>
+                <FormGroup class="md:mb-0">
+                    <FormLabel label="Service" name="service" />
+                    <Input name="service" v-model="form.service" :errors="errors?.service" />
+                    <FormError :errors="errors?.service" />
+                </FormGroup>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-8 mb-0 md:mb-5">
+                <FormGroup class="md:mb-0">
+                    <FormLabel label="Port" name="port" />
+                    <Input name="port" v-model="form.port" type="number" :errors="errors?.port" />
+                    <FormError :errors="errors?.port" />
+                </FormGroup>
+                <FormGroup class="col-span-2 md:mb-0">
+                    <FormLabel label="Url" name="url" />
+                    <Input name="url" v-model="form.url" :errors="errors?.url" />
+                    <FormError :errors="errors?.url" />
+                </FormGroup>
+            </div>
+
+            <div class="flex mb-5 items-center">
+                <FormGroup :margin="false" class="flex-1">
+                    <FormLabel label="Image" name="imageFile" />
+                    <InputFile v-model="form.imageFile" name="image" :errors="errors?.imageFile" />
+                    <FormError :errors="errors?.imageFile" />
+                </FormGroup>
+                <div v-if="form.imageFile" class="ml-6">
+                    <img
+                        :src="imageUrl"
+                        class="
+                            object-cover
+                            h-14
+                            w-14
+                            rounded-full
+                            shadow-2xl
+                            border-2 border-primary-900
+                            dark:border-primary-100
+                        "
+                    />
+                </div>
+            </div>
+
             <FormGroup>
-                <FormLabel label="Name" name="name" />
-                <Input name="name" v-model="form.name" :errors="errors?.name" />
-                <FormError :errors="errors?.name" />
+                <FormLabel label="Website" name="website" />
+                <Input name="website" v-model="form.website" :errors="errors?.website" />
+                <FormError :errors="errors?.website" />
             </FormGroup>
             <FormGroup>
-                <FormLabel label="Filesystem" name="mounted" />
-                <InputDropdown
-                    name="mounted"
-                    mode="single"
-                    v-model="form.mounted"
-                    :errors="errors?.mounted"
-                    :options="
-                        mounteds.map((mounted) => ({
-                            label: mounted,
-                            value: mounted,
-                        }))
-                    "
+                <FormLabel label="Description" name="description" />
+                <InputTextArea
+                    name="description"
+                    v-model="form.description"
+                    :errors="errors?.description"
                 />
-                <FormError :errors="errors?.mounted" />
+                <FormError :errors="errors?.description" />
             </FormGroup>
 
             <div class="flex mt-6">
                 <div>
-                    <Link
-                        :href="$routes.get('applications.show', { id: application.slug })"
-                        class="btn btn-muted mr-5"
+                    <Link :href="$routes.get('applications.index')" class="btn btn-muted mr-5"
                         >Cancel</Link
                     >
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -40,12 +79,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive, inject } from 'vue'
+import { defineComponent, PropType, reactive, computed, inject } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
 import { RoutesModule } from '@/plugins/routes/props'
 import ApplicationModel from '@/models/Application'
+import Card from '@/components/Card.vue'
 import Errors from '@/models/extras/Error'
 import FormGroup from '@/components/forms/FormGroup.vue'
 import ErrorMessage from '@/components/ErrorMessage.vue'
@@ -53,7 +93,8 @@ import Input from '@/components/forms/Input.vue'
 import FormLabel from '@/components/forms/FormLabel.vue'
 import FormError from '@/components/forms/FormError.vue'
 import InputDropdown from '@/components/forms/InputDropdown.vue'
-import Card from '@/components/Card.vue'
+import InputFile from '@/components/forms/InputFile.vue'
+import InputTextArea from '@/components/forms/InputTextArea.vue'
 
 export default defineComponent({
     breadcrumb: [
@@ -65,31 +106,56 @@ export default defineComponent({
             type: Object as PropType<ApplicationModel>,
             required: true,
         },
-        mounteds: {
-            type: Array as PropType<string[]>,
-            default: [],
-        },
         errors: {
             type: Object as PropType<Errors>,
             required: false,
         },
     },
-    components: { Link, FormGroup, ErrorMessage, FormLabel, FormError, Input, InputDropdown, Card },
+    components: {
+        Card,
+        Link,
+        FormGroup,
+        ErrorMessage,
+        FormLabel,
+        FormError,
+        Input,
+        InputDropdown,
+        InputFile,
+        InputTextArea,
+    },
     setup({ application }) {
         // refs
         const $routes = inject<RoutesModule>('$routes')
-        const form = reactive<{ name: string; mounted: string }>({
+        const form = reactive<{
+            name: string
+            service?: string
+            port?: number
+            url?: string
+            imageFile?: File
+            website?: string
+            description?: string
+        }>({
             name: application.name,
-            mounted: application.mounted,
+            service: application.service,
+            port: application.port,
+            url: application.url,
+            imageFile: undefined,
+            website: application.website,
+            description: application.description,
         })
+        const imageUrl = computed(() => form.imageFile && URL.createObjectURL(form.imageFile))
 
         // methods
         const submit = () => {
-            Inertia.put($routes!.get('applications.update', { id: application.slug }) || '', form)
+            Inertia.put($routes!.get('applications.update', { id: application.slug }), form)
         }
 
         // return
-        return { form, submit }
+        return {
+            form,
+            submit,
+            imageUrl,
+        }
     },
 })
 </script>

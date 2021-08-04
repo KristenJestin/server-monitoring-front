@@ -39,17 +39,11 @@
         </div>
 
         <div class="mt-8">
-            <!-- <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg leading-6 font-medium">Informations</h3>
-                <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
-                    All information about the '{{ drive.name }}' disks
-                </p>
-            </div> -->
             <dl>
                 <div
                     v-for="([name, value], index) in Object.entries(infos)"
                     class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
-                    :class="{ 'bg-gray-50 dark:bg-gray-700': index % 2 === 0 }"
+                    :class="{ 'bg-gray-100 dark:bg-gray-700': index % 2 === 0 }"
                 >
                     <dt class="text-sm font-medium text-gray-500 dark:text-gray-300">
                         {{ name }}

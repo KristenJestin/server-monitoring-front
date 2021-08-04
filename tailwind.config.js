@@ -22,6 +22,7 @@ module.exports = {
     },
     variants: {
         extend: {
+            borderWidth: ['first'],
             display: ['group-hover'],
             margin: ['last'],
         },

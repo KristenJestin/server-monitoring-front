@@ -2,6 +2,7 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
+import { Settings } from 'luxon'
 
 import Layout from '@/components/Layout.vue'
 import Routes from '@/plugins/routes'
@@ -14,6 +15,8 @@ InertiaProgress.init({
     // Whether the NProgress spinner will be shown.
     showSpinner: true,
 })
+
+Settings.defaultLocale = 'en-US'
 
 // main
 createInertiaApp({
