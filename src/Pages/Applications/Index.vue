@@ -12,6 +12,9 @@
                     mb-3
                     pt-3
                     border-t border-gray-300
+                    transition
+                    duration-500
+                    ease-in-out
                     dark:border-gray-500
                     first:border-0
                     last:mb-0
@@ -44,6 +47,9 @@
                                     flex
                                     items-center
                                     text-sm text-gray-500
+                                    transition
+                                    duration-500
+                                    ease-in-out
                                     dark:text-gray-400
                                 "
                             >
@@ -54,6 +60,9 @@
                                         h-5
                                         w-5
                                         text-gray-400
+                                        transition
+                                        duration-500
+                                        ease-in-out
                                         dark:text-gray-300
                                     "
                                     aria-hidden="true"
@@ -67,6 +76,9 @@
                                     flex
                                     items-center
                                     text-sm text-gray-500
+                                    transition
+                                    duration-500
+                                    ease-in-out
                                     dark:text-gray-400
                                 "
                             >
@@ -77,6 +89,9 @@
                                         h-5
                                         w-5
                                         text-gray-400
+                                        transition
+                                        duration-500
+                                        ease-in-out
                                         dark:text-gray-300
                                     "
                                     aria-hidden="true"
@@ -90,6 +105,9 @@
                                     lg:flex
                                     items-center
                                     text-sm text-gray-500
+                                    transition
+                                    duration-500
+                                    ease-in-out
                                     dark:text-gray-400
                                 "
                             >
@@ -100,6 +118,9 @@
                                         h-5
                                         w-5
                                         text-gray-400
+                                        transition
+                                        duration-500
+                                        ease-in-out
                                         dark:text-gray-300
                                     "
                                     aria-hidden="true"

@@ -32,8 +32,14 @@
                         fixed
                         inset-0
                         bg-gray-500
+                        transition
+                        duration-500
+                        ease-in-out
                         dark:bg-gray-900
                         bg-opacity-75
+                        transition
+                        duration-500
+                        ease-in-out
                         dark:bg-opacity-90
                         transition-opacity
                     "
@@ -59,6 +65,9 @@
                         inline-block
                         align-bottom
                         bg-white
+                        transition
+                        duration-500
+                        ease-in-out
                         dark:bg-gray-600
                         rounded-lg
                         text-left
@@ -69,7 +78,19 @@
                         sm:my-8 sm:align-middle sm:max-w-lg sm:w-full
                     "
                 >
-                    <div class="bg-white dark:bg-gray-600 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div
+                        class="
+                            bg-white
+                            transition
+                            duration-500
+                            ease-in-out
+                            dark:bg-gray-600
+                            px-4
+                            pt-5
+                            pb-4
+                            sm:p-6 sm:pb-4
+                        "
+                    >
                         <div class="sm:flex sm:items-start">
                             <div
                                 class="
@@ -81,18 +102,39 @@
                                     w-12
                                     rounded-full
                                     bg-red-100
+                                    transition
+                                    duration-500
+                                    ease-in-out
                                     dark:bg-red-800
                                     sm:mx-0 sm:h-10 sm:w-10
                                 "
                             >
-                                <ExclamationIcon class="h-6 w-6 text-red-600 dark:text-red-100" />
+                                <ExclamationIcon
+                                    class="
+                                        h-6
+                                        w-6
+                                        text-red-600
+                                        transition
+                                        duration-500
+                                        ease-in-out
+                                        dark:text-red-100
+                                    "
+                                />
                             </div>
                             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                 <h3 class="text-lg leading-6 font-medium" id="modal-title">
                                     {{ title }}
                                 </h3>
                                 <div class="mt-2">
-                                    <p class="text-sm text-gray-500 dark:text-gray-300">
+                                    <p
+                                        class="
+                                            text-sm text-gray-500
+                                            transition
+                                            duration-500
+                                            ease-in-out
+                                            dark:text-gray-300
+                                        "
+                                    >
                                         {{ message }}
                                     </p>
                                 </div>
@@ -102,6 +144,9 @@
                     <div
                         class="
                             bg-gray-100
+                            transition
+                            duration-500
+                            ease-in-out
                             dark:bg-gray-700
                             px-4
                             py-3

@@ -9,7 +9,18 @@
             bg-white
             text-gray-700
             placeholder-gray-400
-            dark:bg-gray-700 dark:text-gray-100 dark:border-gray-800
+            transition
+            duration-500
+            ease-in-out
+            dark:bg-gray-700
+            transition
+            duration-500
+            ease-in-out
+            dark:text-gray-100
+            transition
+            duration-500
+            ease-in-out
+            dark:border-gray-800
             border
             rounded-lg
             shadow-md

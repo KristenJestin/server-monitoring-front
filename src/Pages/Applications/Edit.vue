@@ -45,6 +45,9 @@
                             rounded-full
                             shadow-2xl
                             border-2 border-primary-900
+                            transition
+                            duration-500
+                            ease-in-out
                             dark:border-primary-100
                         "
                     />

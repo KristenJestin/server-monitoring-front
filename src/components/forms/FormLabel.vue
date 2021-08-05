@@ -1,7 +1,18 @@
 <template>
-    <label :for="id" class="block text-gray-600 dark:text-gray-300 text-sm text-left font-bold">{{
-        label
-    }}</label>
+    <label
+        :for="id"
+        class="
+            block
+            text-gray-600
+            transition
+            duration-500
+            ease-in-out
+            dark:text-gray-300
+            text-sm text-left
+            font-bold
+        "
+        >{{ label }}</label
+    >
 </template>
 
 <script lang="ts">

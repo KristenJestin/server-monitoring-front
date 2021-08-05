@@ -10,7 +10,7 @@
         :addTagOn="['enter', ';', ',']"
         :classes="{
             container:
-                'relative mx-auto w-full flex items-center justify-end box-border cursor-pointer border rounded-lg shadow-md bg-white border-gray-100 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-800 text-base leading-snug outline-none placeholder-gray-400',
+                'relative mx-auto w-full flex items-center justify-end box-border cursor-pointer border rounded-lg shadow-md bg-white border-gray-100 transition duration-500 ease-in-out dark:bg-gray-700 transition duration-500 ease-in-out dark:text-gray-100 transition duration-500 ease-in-out dark:border-gray-800 text-base leading-snug outline-none placeholder-gray-400',
             containerDisabled: 'cursor-default bg-gray-100',
             containerOpen: 'rounded-b-none',
             containerOpenTop: 'rounded-t-none',
@@ -19,7 +19,7 @@
                 'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5',
             multipleLabel:
                 'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5',
-            search: 'w-full h-full absolute inset-0 outline-none appearance-none box-border border-0 text-base font-sans bg-white dark:bg-gray-700 dark:border-gray-800 rounded pl-3.5',
+            search: 'w-full h-full absolute inset-0 outline-none appearance-none box-border border-0 text-base font-sans bg-white transition duration-500 ease-in-out dark:bg-gray-700 transition duration-500 ease-in-out dark:border-gray-800 rounded pl-3.5',
             tags: 'flex-grow flex-shrink flex flex-wrap mt-1 pl-2',
             tag: 'bg-primary-500 text-white text-sm font-semibold py-0.5 pl-2 rounded mr-1 mb-1 flex items-center whitespace-nowrap',
             tagDisabled: 'pr-2 !bg-gray-400 text-white',
@@ -39,21 +39,24 @@
             spinner:
                 'bg-multiselect-spinner bg-center bg-no-repeat w-4 h-4 z-10 mr-3.5 animate-spin flex-shrink-0 flex-grow-0',
             dropdown:
-                'absolute -left-px -right-px bottom-0 transform translate-y-full border border-gray-300 -mt-px overflow-y-scroll z-50 bg-white dark:bg-gray-700 flex flex-col rounded-b',
+                'absolute -left-px -right-px bottom-0 transform translate-y-full border border-gray-300 -mt-px overflow-y-scroll z-50 bg-white transition duration-500 ease-in-out dark:bg-gray-700 flex flex-col rounded-b',
             dropdownTop:
                 '-translate-y-full top-px bottom-auto flex-col-reverse rounded-b-none rounded-t',
             dropdownHidden: 'hidden',
             options: 'flex flex-col p-0 m-0 list-none',
             optionsTop: 'flex-col-reverse',
             option: 'flex items-center justify-start box-border text-left cursor-pointer text-base leading-snug py-2 px-3',
-            optionPointed: 'text-gray-800 bg-gray-100 dark:bg-gray-500 dark:text-white',
+            optionPointed:
+                'text-gray-800 bg-gray-100 transition duration-500 ease-in-out dark:bg-gray-500 transition duration-500 ease-in-out dark:text-white',
             optionSelected: 'text-white bg-primary-500',
             optionDisabled: 'text-gray-300 cursor-not-allowed',
             optionSelectedPointed: 'text-white bg-primary-400 opacity-90',
             optionSelectedDisabled:
                 'text-primary-100 bg-primary-500 bg-opacity-50 cursor-not-allowed',
-            noOptions: 'py-2 px-3 text-gray-600 bg-white dark:bg-gray-700',
-            noResults: 'py-2 px-3 text-gray-600 bg-white dark:bg-gray-700',
+            noOptions:
+                'py-2 px-3 text-gray-600 bg-white transition duration-500 ease-in-out dark:bg-gray-700',
+            noResults:
+                'py-2 px-3 text-gray-600 bg-white transition duration-500 ease-in-out dark:bg-gray-700',
             fakeInput:
                 'bg-transparent absolute left-0 right-0 -bottom-px w-full h-px border-0 p-0 appearance-none outline-none text-transparent',
             spacer: 'h-9 py-px box-content',

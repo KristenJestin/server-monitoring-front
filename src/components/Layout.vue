@@ -1,8 +1,34 @@
 <template>
     <div :class="{ dark }" class="h-full">
-        <div class="bg-gray-200 dark:bg-gray-800 dark:text-gray-100 min-h-full">
+        <div
+            class="
+                bg-gray-200
+                transition
+                duration-500
+                ease-in-out
+                dark:bg-gray-800
+                transition
+                duration-500
+                ease-in-out
+                dark:text-gray-100
+                min-h-full
+            "
+        >
             <div>
-                <nav class="bg-gray-800 dark:bg-gray-900 fixed w-full z-10 top-0 shadow-lg">
+                <nav
+                    class="
+                        bg-gray-800
+                        transition
+                        duration-500
+                        ease-in-out
+                        dark:bg-gray-900
+                        fixed
+                        w-full
+                        z-10
+                        top-0
+                        shadow-lg
+                    "
+                >
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex items-center justify-between h-16">
                             <div class="flex items-center">
@@ -24,7 +50,7 @@
                                                 font-medium
                                             "
                                             :class="{
-                                                'bg-gray-900 text-white dark:bg-gray-800':
+                                                'bg-gray-900 text-white transition duration-500 ease-in-out dark:bg-gray-800':
                                                     $page.url.startsWith(item.href),
                                             }"
                                             >{{ item.name }}</Link

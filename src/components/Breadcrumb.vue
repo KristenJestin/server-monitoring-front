@@ -1,5 +1,7 @@
 <template>
-    <div class="bg-white dark:bg-gray-700 flex items-center h-10">
+    <div
+        class="bg-white transition duration-500 ease-in-out dark:bg-gray-700 flex items-center h-10"
+    >
         <div class="px-5 py-2">
             <Link
                 :href="$routes.get('home')"

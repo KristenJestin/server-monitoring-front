@@ -43,9 +43,22 @@
                 <div
                     v-for="([name, value], index) in Object.entries(infos)"
                     class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
-                    :class="{ 'bg-gray-100 dark:bg-gray-700': index % 2 === 0 }"
+                    :class="{
+                        'bg-gray-100 transition duration-500 ease-in-out dark:bg-gray-700':
+                            index % 2 === 0,
+                    }"
                 >
-                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                    <dt
+                        class="
+                            text-sm
+                            font-medium
+                            text-gray-500
+                            transition
+                            duration-500
+                            ease-in-out
+                            dark:text-gray-300
+                        "
+                    >
                         {{ name }}
                     </dt>
                     <dd class="mt-1 text-sm sm:mt-0 sm:col-span-2">
