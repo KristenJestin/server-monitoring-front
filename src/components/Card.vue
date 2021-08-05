@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="mb-4 flex justify-between items-center px-4 sm:px-0">
-            <Title :name="title" />
+            <Title v-if="title" :name="title" />
+            <slot v-else name="title">Title</slot>
             <div>
                 <slot name="title-right-part"></slot>
             </div>
@@ -40,7 +41,7 @@ export default defineComponent({
     props: {
         title: {
             type: String,
-            required: true,
+            required: false,
         },
     },
     components: { Title },

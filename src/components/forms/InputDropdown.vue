@@ -42,6 +42,7 @@
                 'absolute -left-px -right-px bottom-0 transform translate-y-full border border-gray-300 -mt-px overflow-y-scroll z-50 bg-white dark:bg-gray-700 flex flex-col rounded-b',
             dropdownTop:
                 '-translate-y-full top-px bottom-auto flex-col-reverse rounded-b-none rounded-t',
+            dropdownHidden: 'hidden',
             options: 'flex flex-col p-0 m-0 list-none',
             optionsTop: 'flex-col-reverse',
             option: 'flex items-center justify-start box-border text-left cursor-pointer text-base leading-snug py-2 px-3',

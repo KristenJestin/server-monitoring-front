@@ -9,19 +9,22 @@ import Routes from '@/plugins/routes'
 import '@/assets/styles/app.scss'
 
 // config
+// progress bar
 InertiaProgress.init({
     // The color of the progress bar.
     color: '#a855f7',
     // Whether the NProgress spinner will be shown.
     showSpinner: true,
 })
-
+// luxon
 Settings.defaultLocale = 'en-US'
 
 // main
 createInertiaApp({
     resolve: async (name) => {
-        const page = await import(`./Pages/${name}.vue`).then((module) => module.default)
+        // const page = (await import(`./Pages/${name}.vue`)).default //then((module) => module.default)
+        const pages = import.meta.globEager(`./Pages/**/*.vue`)
+        const page = pages[`./Pages/${name}.vue`].default
 
         if (page.layout === undefined) {
             const breadcrumb = page.breadcrumb

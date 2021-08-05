@@ -3,7 +3,7 @@ import path from 'path'
 import vue from '@vitejs/plugin-vue'
 
 // config
-const baseOutDir = '../../build/public'
+const baseOutDir = '../build/public'
 
 // https://vitejs.dev/config/
 export default defineConfig({

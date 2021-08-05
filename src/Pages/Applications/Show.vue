@@ -1,5 +1,22 @@
 <template>
-    <Card :title="`Application : ${application.name}`">
+    <Card>
+        <template v-slot:title>
+            <div class="relative">
+                <Title :name="`Application : ${application.name}`"></Title>
+                <span class="flex absolute h-3 w-3 top-0 right-0 -mr-4">
+                    <span
+                        class="absolute inline-flex h-full w-full rounded-full opacity-75"
+                        :class="status ? 'animate-ping bg-green-400' : 'bg-red-400'"
+                    >
+                    </span>
+                    <span
+                        class="relative inline-flex rounded-full h-3 w-3"
+                        :class="status ? 'bg-green-400' : 'bg-red-400'"
+                    >
+                    </span>
+                </span>
+            </div>
+        </template>
         <template v-slot:title-right-part>
             <button class="btn btn-danger mr-4" @click="deleteButtonPress">Delete</button>
             <Link
@@ -40,16 +57,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, inject } from 'vue'
+import { defineComponent, PropType, ref, inject, onMounted, onBeforeUnmount } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 import { DateTime } from 'luxon'
+import axios from 'axios'
 
 import { RoutesModule } from '@/plugins/routes/props'
 import { humanFileSize } from '@/utils/readable'
 import ApplicationModel from '@/models/Application'
 import Modal from '@/components/Modal.vue'
 import Card from '@/components/Card.vue'
+import Title from '@/components/Title.vue'
 
 export default defineComponent({
     breadcrumb: [
@@ -62,11 +81,28 @@ export default defineComponent({
             required: true,
         },
     },
-    components: { Link, Modal, Card },
+    components: { Link, Modal, Card, Title },
     setup({ application }) {
+        // variables
+        let statusInterval: NodeJS.Timer | undefined = undefined
+
         // refs
         const $routes = inject<RoutesModule>('$routes')
         const modalOpen = ref(false)
+        const status = ref(false)
+        onMounted(() => {
+            axios
+                .get($routes!.get('applications.status', { id: application.slug }))
+                .then((response) => (status.value = response.data.active))
+            statusInterval = setInterval(() => {
+                axios
+                    .get($routes!.get('applications.status', { id: application.slug }))
+                    .then((response) => (status.value = response.data.active))
+            }, 10 * 1000)
+        })
+        onBeforeUnmount(() => {
+            if (statusInterval) clearInterval(statusInterval)
+        })
 
         // data
         const infos = {
@@ -78,14 +114,14 @@ export default defineComponent({
                 ? `<a href='${application.website}' class='underline'>${application.website}</a>`
                 : undefined,
             'Description': application.description?.replace(/\n/g, '<br />'),
-            'Created At': `${DateTime.fromISO(application.created_at).toRelativeCalendar({
-                unit: 'minutes',
-            })}<span class='text-gray-400'> - ${DateTime.fromISO(
+            'Created At': `${DateTime.fromISO(
+                application.created_at
+            ).toRelativeCalendar()}<span class='text-gray-400'> - ${DateTime.fromISO(
                 application.created_at
             ).toLocaleString(DateTime.DATETIME_MED)}</span>`,
-            'Updated At': `${DateTime.fromISO(application.updated_at).toRelativeCalendar({
-                unit: 'minutes',
-            })}<span class='text-gray-400'> - ${DateTime.fromISO(
+            'Updated At': `${DateTime.fromISO(
+                application.updated_at
+            ).toRelativeCalendar()}<span class='text-gray-400'> - ${DateTime.fromISO(
                 application.updated_at
             ).toLocaleString(DateTime.DATETIME_MED)}</span>`,
         }
@@ -105,6 +141,7 @@ export default defineComponent({
             modalOpen,
             humanFileSize,
             infos,
+            status,
         }
     },
 })
