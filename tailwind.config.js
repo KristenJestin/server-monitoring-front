@@ -14,10 +14,15 @@ module.exports = {
             },
         },
         colors: {
-            ...allColors,
+            // ...allColors,
+            white: allColors.white,
+            gray: allColors.coolGray,
+            red: allColors.red,
+            green: allColors.green,
             primary: colors.purple,
             secondary: colors.blue,
             neutral: colors.gray,
+            transparent: 'transparent',
         },
     },
     variants: {
