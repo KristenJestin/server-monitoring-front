@@ -102,8 +102,9 @@
             </Tag>
         </template>
 
-        <template v-if="mode === 'tags'" v-slot:option="{ option }">
+        <template v-slot:option="{ option }">
             <span
+                v-if="mode === 'tags'"
                 class="flex-1 py-2 px-3"
                 :style="{
                     backgroundColor: option.color,
@@ -111,6 +112,10 @@
                 }"
                 >{{ option.label }}</span
             >
+            <div v-else class="flex items-center">
+                <component v-if="option.icon" :is="option.icon" class="w-6 h-6 mr-1"></component>
+                {{ option.label }}
+            </div>
         </template>
         <template v-slot:caret>
             <ChevronDownIcon

@@ -32,16 +32,12 @@
                         fixed
                         inset-0
                         bg-gray-500
-                        transition
-                        duration-500
-                        ease-in-out
                         dark:bg-gray-900
                         bg-opacity-75
-                        transition
+                        transition-all
                         duration-500
                         ease-in-out
                         dark:bg-opacity-90
-                        transition-opacity
                     "
                     aria-hidden="true"
                 ></div>
@@ -65,7 +61,6 @@
                         inline-block
                         align-bottom
                         bg-white
-                        transition
                         duration-500
                         ease-in-out
                         dark:bg-gray-600

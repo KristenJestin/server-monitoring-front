@@ -61,7 +61,7 @@ import Card from '@/components/Card.vue'
 import Tooltip from '@/components/Tooltip.vue'
 
 export default defineComponent({
-    breadcrumb: [{ name: 'Drives', page: 'drives.index' }],
+    breadcrumb: [{ name: 'Drives' }],
     props: {
         drives: {
             type: Object as PropType<DriveInfoModel[]>,

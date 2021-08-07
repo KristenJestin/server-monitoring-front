@@ -3,9 +3,6 @@
         <div
             class="
                 bg-gray-200
-                transition
-                duration-500
-                ease-in-out
                 dark:bg-gray-800
                 transition
                 duration-500
@@ -50,7 +47,7 @@
                                                 font-medium
                                             "
                                             :class="{
-                                                'bg-gray-900 text-white transition duration-500 ease-in-out dark:bg-gray-800':
+                                                'bg-gray-900 text-white transition-colors duration-500 ease-in-out dark:bg-gray-800':
                                                     $page.url.startsWith(item.href),
                                             }"
                                             >{{ item.name }}</Link
@@ -217,6 +214,10 @@ export default defineComponent({
             {
                 name: 'Applications',
                 href: $routes!.get('applications.index'),
+            },
+            {
+                name: 'Devices',
+                href: $routes!.get('devices.index'),
             },
         ]
 

@@ -1,7 +1,7 @@
 // main
 interface BreadcrumbItem {
     name: string
-    page: string
+    page?: string
 }
 
 // exports

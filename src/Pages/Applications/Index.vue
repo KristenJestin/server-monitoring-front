@@ -186,7 +186,7 @@ import Card from '@/components/Card.vue'
 import Tooltip from '@/components/Tooltip.vue'
 
 export default defineComponent({
-    breadcrumb: [{ name: 'Applications', page: 'applications.index' }],
+    breadcrumb: [{ name: 'Applications' }],
     props: {
         applications: {
             type: Object as PropType<ApplicationModel[]>,

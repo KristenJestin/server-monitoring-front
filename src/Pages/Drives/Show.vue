@@ -90,10 +90,7 @@ import Modal from '@/components/Modal.vue'
 import Card from '@/components/Card.vue'
 
 export default defineComponent({
-    breadcrumb: [
-        { name: 'Drives', page: 'drives.index' },
-        { name: 'Show', page: 'drives.show' },
-    ],
+    breadcrumb: [{ name: 'Drives', page: 'drives.index' }, { name: 'Show' }],
     props: {
         drive: {
             type: Object as PropType<DriveInfoModel>,

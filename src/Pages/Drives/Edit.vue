@@ -56,10 +56,7 @@ import InputDropdown from '@/components/forms/InputDropdown.vue'
 import Card from '@/components/Card.vue'
 
 export default defineComponent({
-    breadcrumb: [
-        { name: 'Drives', page: 'drives.index' },
-        { name: 'Edit', page: 'drives.edit' },
-    ],
+    breadcrumb: [{ name: 'Drives', page: 'drives.index' }, { name: 'Edit' }],
     props: {
         drive: {
             type: Object as PropType<DriveModel>,

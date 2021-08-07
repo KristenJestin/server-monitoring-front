@@ -102,7 +102,7 @@ import InputTextArea from '@/components/forms/InputTextArea.vue'
 export default defineComponent({
     breadcrumb: [
         { name: 'Applications', page: 'applications.index' },
-        { name: 'Edit', page: 'applications.edit' },
+        { name: 'Edit' },
     ],
     props: {
         application: {

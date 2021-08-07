@@ -88,7 +88,7 @@ import Title from '@/components/Title.vue'
 export default defineComponent({
     breadcrumb: [
         { name: 'Applications', page: 'applications.index' },
-        { name: 'Show', page: 'applications.show' },
+        { name: 'Show' },
     ],
     props: {
         application: {

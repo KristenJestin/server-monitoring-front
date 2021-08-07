@@ -13,23 +13,10 @@
         <template v-for="item in items">
             <ChevronRightIcon class="h-4 text-gray-400" />
             <div class="px-5 py-2">
-                <Component
-                    :is="
-                        $page.component.replaceAll('/', '.').toLowerCase() ===
-                        item.page.toLowerCase()
-                            ? 'div'
-                            : 'Link'
-                    "
-                    :href="$routes.get(item.page)"
-                    class="font-bold"
-                    :class="{
-                        'text-gray-400':
-                            $page.component.replace('/', '.').toLowerCase() ===
-                            item.page.toLowerCase(),
-                    }"
-                >
-                    {{ item.name }}
-                </Component>
+                <Link v-if="item.page" :href="$routes.get(item.page)" class="font-bold">{{
+                    item.name
+                }}</Link>
+                <div v-else class="font-bold text-gray-400">{{ item.name }}</div>
             </div>
         </template>
     </div>

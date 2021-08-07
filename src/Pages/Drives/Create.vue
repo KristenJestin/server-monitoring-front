@@ -53,10 +53,7 @@ import InputDropdown from '@/components/forms/InputDropdown.vue'
 import Card from '@/components/Card.vue'
 
 export default defineComponent({
-    breadcrumb: [
-        { name: 'Drives', page: 'drives.index' },
-        { name: 'Create', page: 'drives.create' },
-    ],
+    breadcrumb: [{ name: 'Drives', page: 'drives.index' }, { name: 'Create' }],
     props: {
         mounteds: {
             type: Array as PropType<string[]>,
