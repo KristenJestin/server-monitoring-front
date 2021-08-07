@@ -1,8 +1,24 @@
 <template>
-    <div class="relative flex flex-col items-center group">
+    <div class="relative group inline-flex justify-center">
         <slot></slot>
 
-        <div class="absolute bottom-0 flex-col items-center hidden mb-6 group-hover:flex">
+        <div
+            v-if="message"
+            class="
+                absolute
+                -bottom-3
+                flex-col
+                items-center
+                flex
+                mb-6
+                opacity-0
+                transition-all
+                duration-200
+                ease-in-out
+                group-hover:opacity-100 group-hover:bottom-0
+                pointer-events-none
+            "
+        >
             <span
                 class="
                     relative
@@ -14,6 +30,7 @@
                     whitespace-nowrap
                     bg-gray-900
                     shadow-lg
+                    rounded-md
                 "
                 v-html="message"
             >
@@ -30,7 +47,7 @@ export default defineComponent({
     props: {
         message: {
             type: String,
-            required: true,
+            required: false,
         },
     },
 })

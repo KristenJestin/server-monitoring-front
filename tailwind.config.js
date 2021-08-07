@@ -19,6 +19,7 @@ module.exports = {
             gray: allColors.coolGray,
             red: allColors.red,
             green: allColors.green,
+            yellow: allColors.yellow,
             primary: colors.purple,
             secondary: colors.blue,
             neutral: colors.gray,
@@ -29,6 +30,7 @@ module.exports = {
         extend: {
             borderWidth: ['first'],
             display: ['group-hover'],
+            inset: ['group-hover'],
             margin: ['last'],
         },
     },

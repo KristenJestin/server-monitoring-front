@@ -141,14 +141,12 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td
-                                            class="px-6 py-2 whitespace-nowrap"
-                                            v-html="formatDate(model.created_at)"
-                                        ></td>
-                                        <td
-                                            class="px-6 py-2 whitespace-nowrap"
-                                            v-html="formatDate(model.updated_at)"
-                                        ></td>
+                                        <td class="px-6 py-2 whitespace-nowrap">
+                                            <RelativeDate :date="model.created_at"></RelativeDate>
+                                        </td>
+                                        <td class="px-6 py-2 whitespace-nowrap">
+                                            <RelativeDate :date="model.updated_at"></RelativeDate>
+                                        </td>
                                         <td
                                             class="
                                                 px-6
@@ -193,6 +191,7 @@ import { iconComponents } from './icons'
 import DeviceModelModel from '@/models/DeviceModel'
 import Card from '@/components/Card.vue'
 import Tooltip from '@/components/Tooltip.vue'
+import RelativeDate from '@/components/RelativeDate.vue'
 
 export default defineComponent({
     breadcrumb: [{ name: 'Devices', page: 'devices.index' }, { name: 'Models' }],
@@ -202,20 +201,6 @@ export default defineComponent({
             default: [],
         },
     },
-    components: { Link, Card, Tooltip, ...iconComponents },
-    setup() {
-        // methods
-        const formatDate = (date: string) =>
-            `${DateTime.fromISO(
-                date
-            ).toRelativeCalendar()}<span class='text-gray-400'> - ${DateTime.fromISO(
-                date
-            ).toLocaleString(DateTime.DATETIME_MED)}</span>`
-
-        // return
-        return {
-            formatDate,
-        }
-    },
+    components: { Link, Card, Tooltip, RelativeDate, ...iconComponents },
 })
 </script>
