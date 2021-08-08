@@ -50,8 +50,9 @@
                                                 'bg-gray-900 text-white transition-colors duration-500 ease-in-out dark:bg-gray-800':
                                                     $page.url.startsWith(item.href),
                                             }"
-                                            >{{ item.name }}</Link
                                         >
+                                            {{ item.name }}
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

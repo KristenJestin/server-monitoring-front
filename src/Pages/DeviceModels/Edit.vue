@@ -22,9 +22,9 @@
 
             <div class="flex mt-6">
                 <div>
-                    <Link :href="$routes.get('devices_models.index')" class="btn btn-muted mr-5"
-                        >Cancel</Link
-                    >
+                    <Link :href="$routes.get('devices_models.index')" class="btn btn-muted mr-5">
+                        Cancel
+                    </Link>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="ml-auto">

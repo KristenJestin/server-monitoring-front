@@ -110,8 +110,9 @@
                     backgroundColor: option.color,
                     color: option.textColor,
                 }"
-                >{{ option.label }}</span
             >
+                {{ option.label }}
+            </span>
             <div v-else class="flex items-center">
                 <component v-if="option.icon" :is="option.icon" class="w-6 h-6 mr-1"></component>
                 {{ option.label }}

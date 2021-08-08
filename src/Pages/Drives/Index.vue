@@ -18,11 +18,9 @@
                         </component>
                     </div>
                     <div class="ml-auto font-bold inline-block">
-                        <small class="text-sm"
-                            >({{ humanFileSize(drive.used) }}/{{
-                                humanFileSize(drive.blocks)
-                            }})</small
-                        >
+                        <small class="text-sm">
+                            ({{ humanFileSize(drive.used) }}/{{ humanFileSize(drive.blocks) }})
+                        </small>
                         {{ drive.capacity }}
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 <template>
-    <Tooltip :message="formatedStatus.tooltip || undefined">
+    <Tooltip :message="tooltip ? formatedStatus.tooltip || undefined : undefined">
         <span
             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
             :class="formatedStatus.class"
@@ -25,6 +25,10 @@ export default defineComponent({
         connectionDate: {
             type: String,
             required: false,
+        },
+        tooltip: {
+            type: Boolean,
+            default: true,
         },
     },
     components: { Tooltip },

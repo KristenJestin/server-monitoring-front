@@ -167,8 +167,9 @@
                                                     text-primary-400
                                                     hover:text-primary-700
                                                 "
-                                                >Edit</Link
                                             >
+                                                Edit
+                                            </Link>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -44,9 +44,9 @@
             </transition>
 
             <!-- This element is to trick the browser into centering the modal contents. -->
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true"
-                >&#8203;</span
-            >
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+                &#8203;
+            </span>
 
             <transition
                 enter-active-class="transform transition ease-out duration-300"

@@ -2,18 +2,18 @@
     <Card :title="`Drive : ${drive.name}`">
         <template v-slot:title-right-part>
             <button class="btn btn-danger mr-4" @click="deleteButtonPress">Delete</button>
-            <Link :href="$routes.get('drives.edit', { id: drive.slug })" class="btn btn-muted"
-                >Edit</Link
-            >
+            <Link :href="$routes.get('drives.edit', { id: drive.slug })" class="btn btn-muted">
+                Edit
+            </Link>
         </template>
 
         <div class="block">
             <div class="flex">
                 <div>{{ drive.mounted }}</div>
                 <div class="ml-auto font-bold inline-block">
-                    <small class="text-sm"
-                        >({{ humanFileSize(drive.used) }}/{{ humanFileSize(drive.blocks) }})</small
-                    >
+                    <small class="text-sm">
+                        ({{ humanFileSize(drive.used) }}/{{ humanFileSize(drive.blocks) }})
+                    </small>
                     {{ drive.capacity }}
                 </div>
             </div>

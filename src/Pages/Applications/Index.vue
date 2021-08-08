@@ -169,7 +169,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import {
     CalendarIcon,
@@ -181,6 +181,7 @@ import {
 } from '@heroicons/vue/solid'
 import { DateTime } from 'luxon'
 
+import { buildApplicationUrl as buildUrl } from '@/utils/url'
 import ApplicationModel from '@/models/Application'
 import Card from '@/components/Card.vue'
 import Tooltip from '@/components/Tooltip.vue'
@@ -205,25 +206,12 @@ export default defineComponent({
         DocumentTextIcon,
     },
     setup() {
-        // refs
-        const host = computed(() => window.location.protocol + '//' + window.location.hostname)
-
         // methods
         const formatDate = (date: string) =>
             DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)
-        const buildUrl = (application: ApplicationModel) => {
-            let url = host.value
-            url += `:${application.port}`
-
-            if (application.url)
-                url += (!application.url.startsWith('/') ? '/' : '') + application.url
-
-            return url
-        }
 
         // return
         return {
-            host,
             formatDate,
             buildUrl,
         }

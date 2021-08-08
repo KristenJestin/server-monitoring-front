@@ -33,8 +33,7 @@
                     rounded-md
                 "
                 v-html="message"
-            >
-            </span>
+            ></span>
             <div class="w-3 h-3 -mt-2 transform rotate-45 bg-gray-900"></div>
         </div>
     </div>

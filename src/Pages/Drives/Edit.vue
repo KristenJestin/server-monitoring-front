@@ -30,8 +30,9 @@
                     <Link
                         :href="$routes.get('drives.show', { id: drive.slug })"
                         class="btn btn-muted mr-5"
-                        >Cancel</Link
                     >
+                        Cancel
+                    </Link>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>

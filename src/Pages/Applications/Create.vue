@@ -71,9 +71,9 @@
 
             <div class="flex mt-6">
                 <div>
-                    <Link :href="$routes.get('applications.index')" class="btn btn-muted mr-5"
-                        >Cancel</Link
-                    >
+                    <Link :href="$routes.get('applications.index')" class="btn btn-muted mr-5">
+                        Cancel
+                    </Link>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
@@ -99,10 +99,7 @@ import InputFile from '@/components/forms/InputFile.vue'
 import InputTextArea from '@/components/forms/InputTextArea.vue'
 
 export default defineComponent({
-    breadcrumb: [
-        { name: 'Applications', page: 'applications.index' },
-        { name: 'Create' },
-    ],
+    breadcrumb: [{ name: 'Applications', page: 'applications.index' }, { name: 'Create' }],
     props: {
         errors: {
             type: Object as PropType<Errors>,

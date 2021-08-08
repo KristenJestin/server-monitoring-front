@@ -13,9 +13,9 @@
         <template v-for="item in items">
             <ChevronRightIcon class="h-4 text-gray-400" />
             <div class="px-5 py-2">
-                <Link v-if="item.page" :href="$routes.get(item.page)" class="font-bold">{{
-                    item.name
-                }}</Link>
+                <Link v-if="item.page" :href="$routes.get(item.page)" class="font-bold">
+                    {{ item.name }}
+                </Link>
                 <div v-else class="font-bold text-gray-400">{{ item.name }}</div>
             </div>
         </template>

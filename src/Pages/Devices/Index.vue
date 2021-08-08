@@ -1,9 +1,9 @@
 <template>
     <Card title="devices">
         <template v-slot:title-right-part>
-            <Link :href="$routes.get('devices_models.index')" class="btn btn-muted mr-4"
-                >Models</Link
-            >
+            <Link :href="$routes.get('devices_models.index')" class="btn btn-muted mr-4">
+                Models
+            </Link>
             <Link :href="$routes.get('devices.create')" class="btn btn-primary">Create</Link>
         </template>
 
@@ -122,24 +122,6 @@
                                         >
                                             Created At
                                         </th>
-                                        <th
-                                            scope="col"
-                                            class="
-                                                px-6
-                                                py-3
-                                                text-left text-xs
-                                                font-medium
-                                                text-gray-500
-                                                transition-colors
-                                                duration-500
-                                                ease-in-out
-                                                dark:text-gray-300
-                                                uppercase
-                                                tracking-wider
-                                            "
-                                        >
-                                            Updated At
-                                        </th>
                                         <th scope="col" class="relative px-6 py-3">
                                             <span class="sr-only">Edit / Delete</span>
                                         </th>
@@ -199,9 +181,6 @@
                                         <td class="px-6 py-2 whitespace-nowrap">
                                             <RelativeDate :date="device.created_at"></RelativeDate>
                                         </td>
-                                        <td class="px-6 py-2 whitespace-nowrap">
-                                            <RelativeDate :date="device.updated_at"></RelativeDate>
-                                        </td>
                                         <td
                                             class="
                                                 px-6
@@ -222,8 +201,24 @@
                                                     text-primary-400
                                                     hover:text-primary-700
                                                 "
-                                                >Edit</Link
                                             >
+                                                Edit
+                                            </Link>
+                                            <Link
+                                                :href="
+                                                    $routes.get('devices.show', {
+                                                        id: device.slug,
+                                                    })
+                                                "
+                                                class="
+                                                    ml-3
+                                                    transition-colors
+                                                    text-primary-400
+                                                    hover:text-primary-700
+                                                "
+                                            >
+                                                Show
+                                            </Link>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -240,7 +235,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
-import { DateTime } from 'luxon'
 import { HashtagIcon } from '@heroicons/vue/outline'
 
 import { iconComponents } from '@/Pages/DeviceModels/icons'
@@ -267,19 +261,6 @@ export default defineComponent({
         RelativeDate,
         HashtagIcon,
     },
-    setup() {
-        // methods
-        const formatDate = (date: string) =>
-            `${DateTime.fromISO(
-                date
-            ).toRelative()}<span class='text-gray-400'> - ${DateTime.fromISO(date).toLocaleString(
-                DateTime.DATETIME_MED
-            )}</span>`
-
-        // return
-        return {
-            formatDate,
-        }
-    },
+    setup() {},
 })
 </script>
