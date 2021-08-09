@@ -1,7 +1,5 @@
 <template>
-    <Tooltip :message="formatedClassic">
-        {{ formatedRelative }}
-    </Tooltip>
+    <Tooltip :message="formatedClassic">{{ message || formatedRelative }}</Tooltip>
 </template>
 
 <script lang="ts">
@@ -15,6 +13,10 @@ export default defineComponent({
         date: {
             type: String,
             required: true,
+        },
+        message: {
+            type: String,
+            required: false,
         },
     },
     components: { Tooltip },

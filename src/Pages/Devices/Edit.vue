@@ -113,7 +113,7 @@ export default defineComponent({
             modalOpen.value = true
         }
         const submit = () => {
-            Inertia.put($routes!.get('devices.update', { id: device.slug }), form)
+            Inertia.patch($routes!.get('devices.update', { id: device.slug }), form)
         }
         const destroy = () => {
             Inertia.delete($routes!.get('devices.destroy', { id: device.slug }))

@@ -171,6 +171,25 @@
                                                 :status="device.status"
                                                 :connection-date="device.connection_updated_at"
                                             ></Status>
+                                            <span
+                                                v-if="device.deactivated_at"
+                                                class="
+                                                    ml-4
+                                                    px-2
+                                                    inline-flex
+                                                    text-xs
+                                                    leading-5
+                                                    font-semibold
+                                                    rounded-full
+                                                    bg-red-100
+                                                    text-red-800
+                                                "
+                                            >
+                                                <RelativeDate
+                                                    :date="device.deactivated_at"
+                                                    message="deactivated"
+                                                ></RelativeDate>
+                                            </span>
                                         </td>
                                         <td class="px-6 py-2 whitespace-nowrap">
                                             <Tooltip :message="device.os_version">
@@ -261,6 +280,5 @@ export default defineComponent({
         RelativeDate,
         HashtagIcon,
     },
-    setup() {},
 })
 </script>

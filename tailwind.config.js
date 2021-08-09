@@ -15,15 +15,13 @@ module.exports = {
         },
         colors: {
             // ...allColors,
+            transparent: 'transparent',
             white: allColors.white,
             gray: allColors.coolGray,
             red: allColors.red,
             green: allColors.green,
             yellow: allColors.yellow,
             primary: colors.purple,
-            secondary: colors.blue,
-            neutral: colors.gray,
-            transparent: 'transparent',
         },
     },
     variants: {

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex space-x-2">
+    <div class="inline-flex space-x-2">
         <div v-for="time in [...Array(24).keys()]" class="w-2 h-8 bg-gray-300">
             <div v-if="time <= now.hour && !data[time]" class="h-full w-full bg-red-500"></div>
             <div
