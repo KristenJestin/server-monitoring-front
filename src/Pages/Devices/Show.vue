@@ -2,13 +2,9 @@
     <Card :title="`Device : ${device.name}`">
         <template v-slot:title-right-part>
             <button class="btn btn-danger mr-4" @click="deleteButtonPress">Delete</button>
-            <Link
-                :href="$routes.get('devices.deactivate', { id: device.slug })"
-                method="patch"
-                class="btn btn-danger-light mr-4"
-            >
+            <button class="btn btn-danger-light mr-4" @click="deactivateButtonPress">
                 {{ !device.deactivated_at ? 'Deactivate' : 'Reactivate' }}
-            </Link>
+            </button>
             <Link :href="$routes.get('devices.edit', { id: device.slug })" class="btn btn-muted">
                 Edit
             </Link>
@@ -124,11 +120,15 @@ export default defineComponent({
         const destroy = () => {
             Inertia.delete($routes!.get('devices.destroy', { id: device.slug }))
         }
+        const deactivateButtonPress = () => {
+            Inertia.patch($routes!.get('devices.deactivate', { id: device.slug }))
+        }
 
         // return
         return {
             destroy,
             deleteButtonPress,
+            deactivateButtonPress,
             modalOpen,
             uptime,
             now,
