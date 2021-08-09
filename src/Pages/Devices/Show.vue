@@ -49,6 +49,10 @@
                 <RelativeDate :date="device.updated_at"></RelativeDate>
             </DetailsTable>
         </dl>
+
+        <div class="mt-10">
+            <Uptime :dates="uptime"></Uptime>
+        </div>
     </Card>
 
     <Modal
@@ -61,17 +65,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, inject, onMounted, onBeforeUnmount } from 'vue'
+import { defineComponent, PropType, ref, inject, onMounted } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
+import axios from 'axios'
 
 import { RoutesModule } from '@/plugins/routes/props'
 import DeviceModel from '@/models/Device'
+import DeviceUptimeModel from '@/models/partials/DeviceUptime'
 import Modal from '@/components/Modal.vue'
 import Card from '@/components/Card.vue'
 import DetailsTable from '@/components/DetailsTable.vue'
 import RelativeDate from '@/components/RelativeDate.vue'
 import Status from './components/Status.vue'
+import Uptime from '@/components/Uptime.vue'
 
 export default defineComponent({
     breadcrumb: [{ name: 'Devices', page: 'devices.index' }, { name: 'Show' }],
@@ -81,11 +88,17 @@ export default defineComponent({
             required: true,
         },
     },
-    components: { Link, Modal, Card, DetailsTable, RelativeDate, Status },
+    components: { Link, Modal, Card, DetailsTable, RelativeDate, Status, Uptime },
     setup({ device }) {
         // refs
         const $routes = inject<RoutesModule>('$routes')
         const modalOpen = ref(false)
+        const uptime = ref<DeviceUptimeModel[]>([])
+        onMounted(() => {
+            axios
+                .get<DeviceUptimeModel[]>($routes!.get('devices.uptime', { id: device.slug }))
+                .then((response) => (uptime.value = response.data))
+        })
 
         // methods
         const deleteButtonPress = () => {
@@ -100,6 +113,7 @@ export default defineComponent({
             destroy,
             deleteButtonPress,
             modalOpen,
+            uptime,
         }
     },
 })

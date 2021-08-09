@@ -182,7 +182,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 import { SunIcon, MoonIcon } from '@heroicons/vue/outline'
 
 import { RoutesModule } from '@/plugins/routes/props'
-import useDarkMode from '@/composables/darkMode'
+import useDarkMode from '@/composables/useDarkMode'
 import BreadcrumbItem from '@/models/extras/BreadcrumbItem'
 import AlertModel from '@/models/extras/Alert'
 import Logo from '@/components/Logo.vue'
