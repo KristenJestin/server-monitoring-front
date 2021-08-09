@@ -11,7 +11,7 @@
                 v-for="index in displayOptions.divider"
                 :key="index"
                 class="w-full"
-                :class="`h-1/${displayOptions.divider}`"
+                :class="getPartedHourSize(displayOptions.divider)"
             >
                 <div
                     v-if="data[time] && isInInterval(data[time], index)"
@@ -22,16 +22,6 @@
                     class="h-full w-full bg-red-500"
                 ></div>
             </div>
-
-            <!-- <div class="h-1/2 w-full">
-                <div v-if="data[time]" class="h-full w-full bg-green-500"></div>
-                <div v-else-if="time < now" class="h-full w-full bg-red-500"></div>
-            </div>
-            <div class="h-1/2 w-full">
-                <div v-if="data[time]" class="h-full w-full bg-green-500"></div>
-                <div v-else-if="time < now" class="h-full w-full bg-red-500"></div>
-            </div>
-            -->
         </div>
     </div>
 </template>
@@ -103,6 +93,21 @@ export default defineComponent({
             return true
         }
 
+        const getPartedHourSize = (divider: number) => {
+            switch (divider) {
+                case 6:
+                    return 'h-1/6'
+                case 5:
+                    return 'h-1/5'
+                case 4:
+                    return 'h-1/4'
+                case 3:
+                    return 'h-1/3'
+                default:
+                    return 'h-1/2'
+            }
+        }
+
         // return
         return {
             displayOptions,
@@ -114,6 +119,7 @@ export default defineComponent({
             isAllIndexIn,
             isInInterval,
             isInOffInterval,
+            getPartedHourSize,
         }
     },
 })
