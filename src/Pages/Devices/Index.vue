@@ -1,10 +1,9 @@
 <template>
     <Card title="devices">
         <template v-slot:title-right-part>
-            <Link :href="$routes.get('devices_models.index')" class="btn btn-muted mr-4">
+            <Link :href="$routes.get('devices_models.index')" class="btn btn-muted">
                 Models
             </Link>
-            <Link :href="$routes.get('devices.create')" class="btn btn-primary">Create</Link>
         </template>
 
         <div v-if="devices?.length">

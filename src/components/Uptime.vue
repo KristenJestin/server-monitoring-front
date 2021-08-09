@@ -92,7 +92,7 @@ export default defineComponent({
         const isInOffInterval = (time: number, index: number): boolean => {
             const difference = displayOptions.total / displayOptions.divider
 
-            return time < now.hour || (time === now.hour && difference * (index - 1) <= now.minute)
+            return time < now.hour || (time === now.hour && difference * (index - 1) < now.minute)
         }
         const isAllIndexIn = (minutes: number[]): boolean => {
             const interval = displayOptions.total / displayOptions.divider
