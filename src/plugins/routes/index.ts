@@ -66,7 +66,7 @@ const getRouteUrl = (name: string): RouteElement => {
         )
 
     // find route with name
-    const route = routes.find((route) => route.name === name)
+    const route = routes.find((r) => r && r.name && r.name === name)
     if (!route) throw new Error(`${PLUGIN_NAME} : the route name '${name}' doesnt exists.`)
     return route
 }

@@ -1,4 +1,3 @@
-// main
 interface DeviceModel {
     id: string
     name: string
@@ -7,6 +6,7 @@ interface DeviceModel {
 
     created_at: string
     updated_at: string
+    // main
 }
 
 // exports

@@ -1,7 +1,7 @@
 <template>
     <div class="inline-flex space-x-2">
         <div v-for="time in [...Array(24).keys()]" class="w-2 h-8 bg-gray-300">
-            <div v-if="time <= now.hour && !data[time]" class="h-full w-full bg-red-500"></div>
+            <div v-if="time < now.hour && !data[time]" class="h-full w-full bg-red-500"></div>
             <div
                 v-else-if="data[time] && isAllIndexIn(data[time])"
                 class="h-full w-full bg-green-500"
@@ -82,7 +82,7 @@ export default defineComponent({
         const isInOffInterval = (time: number, index: number): boolean => {
             const difference = displayOptions.total / displayOptions.divider
 
-            return time < now.hour || (time === now.hour && difference * (index - 1) < now.minute)
+            return time < now.hour || (time === now.hour && difference * index <= now.minute)
         }
         const isAllIndexIn = (minutes: number[]): boolean => {
             const interval = displayOptions.total / displayOptions.divider
