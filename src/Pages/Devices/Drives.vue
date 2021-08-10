@@ -1,20 +1,46 @@
 <template>
     <Card title="Device Drives">
+        <form @submit.prevent="submit" class="flex">
+            <InputDateRange
+                name="date"
+                v-model="form.date"
+                range
+                :errors="errors?.name"
+                :max="now.toJSDate()"
+                class="flex-grow"
+            />
+
+            <button type="submit" class="btn btn-primary ml-10">Submit</button>
+        </form>
+
+        <div class="mt-5"></div>
         <ApexChart :options="chart.options" :series="chart.series"></ApexChart>
     </Card>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, reactive, inject } from 'vue'
 import ApexChart from 'vue3-apexcharts'
 import { DateTime } from 'luxon'
+import { Inertia } from '@inertiajs/inertia'
+import { Link } from '@inertiajs/inertia-vue3'
 
 import useBreadcrumb from '@/composables/useBreadcrumb'
 import { RoutesModule } from '@/plugins/routes/props'
 import { groupBy } from '@/utils/array'
 import DeviceModel from '@/models/Device'
 import DeviceDriveModel from '@/models/DeviceDrive'
+import Errors from '@/models/extras/Error'
 import Card from '@/components/Card.vue'
+import FormGroup from '@/components/forms/FormGroup.vue'
+import InputDateRange from '@/components/forms/InputDateRange.vue'
+import FormLabel from '@/components/forms/FormLabel.vue'
+import FormError from '@/components/forms/FormError.vue'
+
+interface DriveQueries {
+    start: string
+    end: string
+}
 
 export default defineComponent({
     props: {
@@ -26,15 +52,32 @@ export default defineComponent({
             type: Array as PropType<DeviceDriveModel[]>,
             default: [],
         },
+        queries: {
+            type: Object as PropType<DriveQueries>,
+            default: {},
+        },
+        errors: {
+            type: Object as PropType<Errors>,
+            required: false,
+        },
     },
-    components: { Card, ApexChart },
+    components: { Card, ApexChart, Link, FormGroup, InputDateRange, FormLabel, FormError },
     setup(props) {
-        // data
+        // refs
         useBreadcrumb(
             { name: 'Devices', page: 'devices.index' },
             { name: props.device.name, page: 'devices.show', params: { id: props.device.slug } },
             { name: 'Drives' }
         )
+        const $routes = inject<RoutesModule>('$routes')
+        const form = reactive<{ date: { start?: Date; end?: Date } }>({
+            date: {
+                start: DateTime.fromISO(props.queries.start).toJSDate(),
+                end: DateTime.fromISO(props.queries.end).toJSDate(),
+            },
+        })
+
+        // data
         const results = groupBy(props.drives, (i) => i.name)
         const chart = {
             series: Object.entries(results).map(([key, elements]) => ({
@@ -85,9 +128,22 @@ export default defineComponent({
                 },
             },
         }
+        const now = DateTime.now()
+
+        // methods
+        const submit = () => {
+            Inertia.get($routes!.get('devices.drives', { id: props.device.slug }), {
+                start: form.date.start ? DateTime.fromJSDate(form.date.start).toISODate() : null,
+                end: form.date.end ? DateTime.fromJSDate(form.date.end).toISODate() : null,
+            })
+        }
+
         // return
         return {
+            form,
             chart,
+            now,
+            submit,
         }
     },
 })
