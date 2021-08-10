@@ -5,6 +5,7 @@ import { InertiaProgress } from '@inertiajs/progress'
 import { Settings } from 'luxon'
 
 import Layout from '@/components/Layout.vue'
+import Breadcrumb from '@/components/Breadcrumb.vue'
 import Routes from '@/plugins/routes'
 import '@/assets/styles/app.scss'
 
@@ -26,8 +27,10 @@ createInertiaApp({
         const pages = import.meta.globEager(`./Pages/**/*.vue`)
         const page = pages[`./Pages/${name}.vue`].default
 
-        if (page.layout === undefined) {
-            const breadcrumb = page.breadcrumb
+        let breadcrumb
+        if (page.breadcrumb) breadcrumb = page.breadcrumb
+
+        if (!page.layout) {
             page.layout = h(Layout, { breadcrumb }, () => page)
         }
 
@@ -36,7 +39,9 @@ createInertiaApp({
     setup({ el, app, props, plugin }) {
         createApp({ render: () => h(app, props) })
             .use(plugin)
+
             .use(Routes)
+
             .mount(el)
     },
 })

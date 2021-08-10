@@ -83,6 +83,7 @@ import { defineComponent, PropType, ref, inject } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import { RoutesModule } from '@/plugins/routes/props'
 import { humanFileSize } from '@/utils/readable'
 import DriveInfoModel from '@/models/DriveInfo'
@@ -90,7 +91,6 @@ import Modal from '@/components/Modal.vue'
 import Card from '@/components/Card.vue'
 
 export default defineComponent({
-    breadcrumb: [{ name: 'Drives', page: 'drives.index' }, { name: 'Show' }],
     props: {
         drive: {
             type: Object as PropType<DriveInfoModel>,
@@ -100,6 +100,7 @@ export default defineComponent({
     components: { Link, Modal, Card },
     setup({ drive }) {
         // refs
+        useBreadcrumb({ name: 'Drives', page: 'drives.index' }, { name: 'Show' })
         const $routes = inject<RoutesModule>('$routes')
         const modalOpen = ref(false)
 

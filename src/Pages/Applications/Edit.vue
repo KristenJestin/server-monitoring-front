@@ -86,6 +86,7 @@ import { defineComponent, PropType, reactive, computed, inject } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import { RoutesModule } from '@/plugins/routes/props'
 import ApplicationModel from '@/models/Application'
 import Card from '@/components/Card.vue'
@@ -100,7 +101,6 @@ import InputFile from '@/components/forms/InputFile.vue'
 import InputTextArea from '@/components/forms/InputTextArea.vue'
 
 export default defineComponent({
-    breadcrumb: [{ name: 'Applications', page: 'applications.index' }, { name: 'Edit' }],
     props: {
         application: {
             type: Object as PropType<ApplicationModel>,
@@ -125,6 +125,11 @@ export default defineComponent({
     },
     setup({ application }) {
         // refs
+        useBreadcrumb(
+            { name: 'Applications', page: 'applications.index' },
+            { name: 'Show', page: 'applications.show', params: { id: application.slug } },
+            { name: 'Edit' }
+        )
         const $routes = inject<RoutesModule>('$routes')
         const form = reactive<{
             name: string

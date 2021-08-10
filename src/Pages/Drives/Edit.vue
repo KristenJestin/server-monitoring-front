@@ -45,6 +45,7 @@ import { defineComponent, PropType, reactive, inject } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import { RoutesModule } from '@/plugins/routes/props'
 import DriveModel from '@/models/Drive'
 import Errors from '@/models/extras/Error'
@@ -57,7 +58,6 @@ import InputDropdown from '@/components/forms/InputDropdown.vue'
 import Card from '@/components/Card.vue'
 
 export default defineComponent({
-    breadcrumb: [{ name: 'Drives', page: 'drives.index' }, { name: 'Edit' }],
     props: {
         drive: {
             type: Object as PropType<DriveModel>,
@@ -75,6 +75,11 @@ export default defineComponent({
     components: { Link, FormGroup, ErrorMessage, FormLabel, FormError, Input, InputDropdown, Card },
     setup({ drive }) {
         // refs
+        useBreadcrumb(
+            { name: 'Drives', page: 'drives.index' },
+            { name: 'Show', page: 'drives.show', params: { id: drive.slug } },
+            { name: 'Edit' }
+        )
         const $routes = inject<RoutesModule>('$routes')
         const form = reactive<{ name: string; mounted: string }>({
             name: drive.name,

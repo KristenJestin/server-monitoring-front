@@ -53,6 +53,12 @@
             </DetailsTable>
         </dl>
 
+        <div class="my-5">
+            <Link :href="$routes.get('devices.drives', { id: device.slug })" class="btn btn-muted">
+                Drives
+            </Link>
+        </div>
+
         <div class="mt-10">
             <div class="mb-2">
                 <Title name="Uptime of day" size="text-xl" class="mb-0"></Title>
@@ -79,6 +85,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 import axios from 'axios'
 import { DateTime } from 'luxon'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import { RoutesModule } from '@/plugins/routes/props'
 import DeviceModel from '@/models/Device'
 import DeviceUptimeModel from '@/models/partials/DeviceUptime'
@@ -91,7 +98,6 @@ import Uptime from '@/components/Uptime.vue'
 import Title from '@/components/Title.vue'
 
 export default defineComponent({
-    breadcrumb: [{ name: 'Devices', page: 'devices.index' }, { name: 'Show' }],
     props: {
         device: {
             type: Object as PropType<DeviceModel>,
@@ -104,6 +110,7 @@ export default defineComponent({
         const now = DateTime.now()
 
         // refs
+        useBreadcrumb({ name: 'Devices', page: 'devices.index' }, { name: device.name })
         const $routes = inject<RoutesModule>('$routes')
         const modalOpen = ref(false)
         const uptime = ref<DeviceUptimeModel[]>([])

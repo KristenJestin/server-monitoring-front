@@ -1,9 +1,7 @@
 <template>
     <Card title="devices">
         <template v-slot:title-right-part>
-            <Link :href="$routes.get('devices_models.index')" class="btn btn-muted">
-                Models
-            </Link>
+            <Link :href="$routes.get('devices_models.index')" class="btn btn-muted">Models</Link>
         </template>
 
         <div v-if="devices?.length">
@@ -255,6 +253,7 @@ import { defineComponent, PropType } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import { HashtagIcon } from '@heroicons/vue/outline'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import { iconComponents } from '@/Pages/DeviceModels/icons'
 import DeviceModel from '@/models/Device'
 import Status from './components/Status.vue'
@@ -263,7 +262,6 @@ import RelativeDate from '@/components/RelativeDate.vue'
 import Tooltip from '@/components/Tooltip.vue'
 
 export default defineComponent({
-    breadcrumb: [{ name: 'Devices' }],
     props: {
         devices: {
             type: Object as PropType<DeviceModel[]>,
@@ -278,6 +276,10 @@ export default defineComponent({
         ...iconComponents,
         RelativeDate,
         HashtagIcon,
+    },
+    setup() {
+        // refs
+        useBreadcrumb({ name: 'Devices' })
     },
 })
 </script>

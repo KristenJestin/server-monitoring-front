@@ -181,13 +181,13 @@ import {
 } from '@heroicons/vue/solid'
 import { DateTime } from 'luxon'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import { buildApplicationUrl as buildUrl } from '@/utils/url'
 import ApplicationModel from '@/models/Application'
 import Card from '@/components/Card.vue'
 import Tooltip from '@/components/Tooltip.vue'
 
 export default defineComponent({
-    breadcrumb: [{ name: 'Applications' }],
     props: {
         applications: {
             type: Object as PropType<ApplicationModel[]>,
@@ -206,6 +206,9 @@ export default defineComponent({
         DocumentTextIcon,
     },
     setup() {
+        // refs
+        useBreadcrumb({ name: 'Applications' })
+
         // methods
         const formatDate = (date: string) =>
             DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)

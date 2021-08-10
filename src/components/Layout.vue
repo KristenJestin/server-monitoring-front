@@ -151,7 +151,7 @@
                 </nav>
 
                 <main class="pt-16">
-                    <Breadcrumb :items="breadcrumb" />
+                    <Breadcrumb />
                     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                         <slot />
                     </div>
@@ -183,7 +183,6 @@ import { SunIcon, MoonIcon } from '@heroicons/vue/outline'
 
 import { RoutesModule } from '@/plugins/routes/props'
 import useDarkMode from '@/composables/useDarkMode'
-import BreadcrumbItem from '@/models/extras/BreadcrumbItem'
 import AlertModel from '@/models/extras/Alert'
 import Logo from '@/components/Logo.vue'
 import Alert from '@/components/Alert.vue'
@@ -194,10 +193,6 @@ export default defineComponent({
         alert: {
             type: Object as PropType<AlertModel>,
             required: false,
-        },
-        breadcrumb: {
-            type: Array as PropType<BreadcrumbItem[]>,
-            default: [],
         },
     },
     components: { Alert, Link, Logo, Breadcrumb, SunIcon, MoonIcon },

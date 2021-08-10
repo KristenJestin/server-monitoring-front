@@ -92,6 +92,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 import axios from 'axios'
 import { ExternalLinkIcon } from '@heroicons/vue/solid'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import { buildApplicationUrl as buildUrl } from '@/utils/url'
 import { RoutesModule } from '@/plugins/routes/props'
 import ApplicationModel from '@/models/Application'
@@ -102,7 +103,6 @@ import DetailsTable from '@/components/DetailsTable.vue'
 import RelativeDate from '@/components/RelativeDate.vue'
 
 export default defineComponent({
-    breadcrumb: [{ name: 'Applications', page: 'applications.index' }, { name: 'Show' }],
     props: {
         application: {
             type: Object as PropType<ApplicationModel>,
@@ -115,6 +115,7 @@ export default defineComponent({
         let statusInterval: NodeJS.Timer | undefined = undefined
 
         // refs
+        useBreadcrumb({ name: 'Applications', page: 'applications.index' }, { name: 'Show' })
         const $routes = inject<RoutesModule>('$routes')
         const modalOpen = ref(false)
         const status = ref(false)

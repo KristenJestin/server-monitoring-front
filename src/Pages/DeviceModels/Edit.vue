@@ -50,6 +50,7 @@ import { defineComponent, PropType, reactive, inject, ref } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import { RoutesModule } from '@/plugins/routes/props'
 import { icons } from './icons'
 import DeviceModelModel from '@/models/DeviceModel'
@@ -64,11 +65,6 @@ import Card from '@/components/Card.vue'
 import Modal from '@/components/Modal.vue'
 
 export default defineComponent({
-    breadcrumb: [
-        { name: 'Devices', page: 'devices.index' },
-        { name: 'Models', page: 'devices_models.index' },
-        { name: 'Edit' },
-    ],
     props: {
         model: {
             type: Object as PropType<DeviceModelModel>,
@@ -92,6 +88,12 @@ export default defineComponent({
     },
     setup({ model }) {
         // refs
+        useBreadcrumb(
+            { name: 'Devices', page: 'devices.index' },
+            { name: 'Models', page: 'devices_models.index' },
+            { name: 'Show', page: 'devices_models.show', params: { id: model.slug } },
+            { name: 'Edit' }
+        )
         const $routes = inject<RoutesModule>('$routes')
         const modalOpen = ref(false)
         const form = reactive<{ name: string; icon: string }>({

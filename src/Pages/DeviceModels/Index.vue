@@ -186,8 +186,8 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
-import { DateTime } from 'luxon'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import { iconComponents } from './icons'
 import DeviceModelModel from '@/models/DeviceModel'
 import Card from '@/components/Card.vue'
@@ -195,7 +195,6 @@ import Tooltip from '@/components/Tooltip.vue'
 import RelativeDate from '@/components/RelativeDate.vue'
 
 export default defineComponent({
-    breadcrumb: [{ name: 'Devices', page: 'devices.index' }, { name: 'Models' }],
     props: {
         models: {
             type: Object as PropType<DeviceModelModel[]>,
@@ -203,5 +202,9 @@ export default defineComponent({
         },
     },
     components: { Link, Card, Tooltip, RelativeDate, ...iconComponents },
+    setup() {
+        // refs
+        useBreadcrumb({ name: 'Devices', page: 'devices.index' }, { name: 'Models' })
+    },
 })
 </script>

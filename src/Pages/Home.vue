@@ -103,6 +103,7 @@
 import { defineComponent, PropType, computed } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import DriveInfoModel from '@/models/DriveInfo'
 import ApplicationModel from '@/models/Application'
 import { humanFileSize } from '@/utils/readable'
@@ -123,6 +124,7 @@ export default defineComponent({
     components: { Link, Card, Tooltip },
     setup() {
         // refs
+        useBreadcrumb()
         const host = computed(() => window.location.protocol + '//' + window.location.hostname)
 
         // methods
