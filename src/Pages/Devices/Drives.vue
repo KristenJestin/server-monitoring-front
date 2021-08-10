@@ -1,6 +1,6 @@
 <template>
     <Card title="Device Drives">
-        <ApexChart :options="chart.chartOptions" :series="chart.series"></ApexChart>
+        <ApexChart :options="chart.options" :series="chart.series"></ApexChart>
     </Card>
 </template>
 
@@ -42,10 +42,15 @@ export default defineComponent({
                 data: elements.map((d) => d.total_used_percentage),
             })),
 
-            chartOptions: {
+            options: {
                 chart: {
                     height: 350,
                     type: 'area',
+                    toolbar: {
+                        tools: {
+                            download: false,
+                        },
+                    },
                 },
                 dataLabels: {
                     enabled: false,
@@ -57,7 +62,9 @@ export default defineComponent({
                     type: 'datetime',
                     categories: props.drives
                         .map((d) =>
-                            DateTime.fromISO(d.created_at).toFormat("yyyy-MM-dd'T'HH:mm:'00'")
+                            DateTime.fromISO(d.created_at)
+                                .endOf('minute')
+                                .toISO({ includeOffset: false })
                         )
                         .filter((v, i, a) => a.indexOf(v) === i),
                 },
@@ -85,3 +92,25 @@ export default defineComponent({
     },
 })
 </script>
+
+<style>
+.apexcharts-legend-text,
+.apexcharts-text,
+.apexcharts-tooltip-text {
+    @apply transition-colors duration-500 ease-in-out text-gray-700 dark:text-gray-200 fill-current !important;
+}
+
+.apexcharts-toolbar svg {
+    @apply transition-colors duration-500 ease-in-out text-gray-400 dark:text-gray-400 fill-current !important;
+}
+.apexcharts-selected svg {
+    @apply transition-colors duration-500 ease-in-out text-gray-900 dark:text-gray-100 fill-current !important;
+}
+
+.apexcharts-tooltip-title {
+    @apply transition-colors duration-500 ease-in-out bg-gray-100 dark:bg-gray-700 fill-current border-b border-gray-300 dark:border-gray-900 !important;
+}
+.apexcharts-tooltip {
+    @apply transition-colors duration-500 ease-in-out bg-gray-50 dark:bg-gray-800 fill-current border-0 !important;
+}
+</style>
