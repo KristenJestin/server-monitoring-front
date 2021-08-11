@@ -30,6 +30,8 @@ module.exports = {
             display: ['group-hover'],
             inset: ['group-hover'],
             margin: ['last'],
+            backgroundColor: ['checked'],
+            borderColor: ['checked'],
         },
     },
     plugins: [],

@@ -83,6 +83,8 @@
                     </div>
                 </div>
 
+                <ArrowSmRightIcon class="h-6 w-6 text-gray-400 dark:text-gray-500" />
+
                 <div class="relative flex-grow">
                     <CalendarIcon
                         class="
@@ -159,7 +161,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref, watch } from 'vue'
 import { DatePicker } from 'v-calendar'
-import { CalendarIcon } from '@heroicons/vue/outline'
+import { CalendarIcon, ArrowSmRightIcon } from '@heroicons/vue/outline'
 import { XIcon } from '@heroicons/vue/solid'
 
 import useDarkMode from '@/composables/useDarkMode'
@@ -183,11 +185,7 @@ export default defineComponent({
             default: undefined,
         },
     },
-    components: {
-        DatePicker,
-        CalendarIcon,
-        XIcon,
-    },
+    components: { DatePicker, CalendarIcon, XIcon, ArrowSmRightIcon },
     setup({ name, ...props }, { emit }) {
         // refs
         const { darkMode } = useDarkMode()

@@ -76,8 +76,19 @@
                                     </button>
                                 </div>
                                 <div class="ml-4 flex items-center md:ml-6">
-                                    <button href="/drives/create" class="btn btn-primary-light">
+                                    <Link
+                                        v-if="!auth"
+                                        :href="$routes.get('auth.index')"
+                                        class="btn btn-primary-light"
+                                    >
                                         Login
+                                    </Link>
+                                    <button
+                                        v-else
+                                        class="btn btn-primary-light"
+                                        @click="buttonLogoutClick"
+                                    >
+                                        Logout
                                     </button>
                                 </div>
                             </div>
@@ -178,11 +189,13 @@
 
 <script lang="ts">
 import { defineComponent, PropType, inject } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 import { SunIcon, MoonIcon } from '@heroicons/vue/outline'
 
 import { RoutesModule } from '@/plugins/routes/props'
 import useDarkMode from '@/composables/useDarkMode'
+import AuthUserModel from '@/models/extras/AuthUser'
 import AlertModel from '@/models/extras/Alert'
 import Logo from '@/components/Logo.vue'
 import Alert from '@/components/Alert.vue'
@@ -192,6 +205,10 @@ export default defineComponent({
     props: {
         alert: {
             type: Object as PropType<AlertModel>,
+            required: false,
+        },
+        auth: {
+            type: Object as PropType<AuthUserModel>,
             required: false,
         },
     },
@@ -217,11 +234,17 @@ export default defineComponent({
             },
         ]
 
+        // methods
+        const buttonLogoutClick = () => {
+            Inertia.post($routes!.get('auth.logout'))
+        }
+
         // return
         return {
             menu,
             ...darkMode,
             changeDarkMode,
+            buttonLogoutClick,
         }
     },
 })

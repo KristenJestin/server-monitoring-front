@@ -53,12 +53,19 @@
             <Link :href="$routes.get('applications.index')" class="btn btn-muted">GET ALL</Link>
         </template>
 
-        <div v-if="applications?.length" class="flex flex-wrap flex-row">
+        <div
+            v-if="applications?.length"
+            class="
+                grid grid-flow-col grid-cols-2 grid-flow-row-dense
+                gap-x-10 gap-y-5
+                md:flex md:flex-wrap md:flex-row md:gap-0
+            "
+        >
             <a
                 v-for="application in applications"
                 :href="buildUrl(application)"
                 target="_blank"
-                class="h-32 w-32 m-5 relative overflow-hidden rounded-md shadow-md"
+                class="md:h-32 md:w-32 md:m-5 relative overflow-hidden rounded-md shadow-md"
             >
                 <img
                     :src="
@@ -107,6 +114,7 @@ import useBreadcrumb from '@/composables/useBreadcrumb'
 import DriveInfoModel from '@/models/DriveInfo'
 import ApplicationModel from '@/models/Application'
 import { humanFileSize } from '@/utils/readable'
+import { buildApplicationUrl as buildUrl } from '@/utils/url'
 import Card from '@/components/Card.vue'
 import Tooltip from '@/components/Tooltip.vue'
 
@@ -125,18 +133,6 @@ export default defineComponent({
     setup() {
         // refs
         useBreadcrumb()
-        const host = computed(() => window.location.protocol + '//' + window.location.hostname)
-
-        // methods
-        const buildUrl = (application: ApplicationModel) => {
-            let url = host.value
-            url += `:${application.port}`
-
-            if (application.url)
-                url += (!application.url.startsWith('/') ? '/' : '') + application.url
-
-            return url
-        }
 
         // return
         return {

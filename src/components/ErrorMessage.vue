@@ -8,7 +8,7 @@
                     ></path>
                 </svg>
 
-                <p class="mx-3">Validation Error.</p>
+                <p class="mx-3">{{ message || 'Validation Error.' }}</p>
             </div>
 
             <!-- <button
@@ -40,3 +40,16 @@
         </div>
     </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+    props: {
+        message: {
+            type: String,
+            required: false,
+        },
+    },
+})
+</script>
