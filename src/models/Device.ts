@@ -17,6 +17,7 @@ interface Device {
     status: STATUS
     connection_updated_at?: string
     deactivated_at?: string
+    api_key: string
 
     model_id?: string
     model?: DeviceModel

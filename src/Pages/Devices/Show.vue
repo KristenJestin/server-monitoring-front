@@ -25,6 +25,18 @@
             <DetailsTable name="OS Version">
                 <span v-if="device.os_version">{{ device.os_version }}</span>
             </DetailsTable>
+            <DetailsTable name="Api Key">
+                <div class="flex items-center">
+                    <div class="flex-grow">
+                        <span v-if="device.api_key">{{ device.api_key }}</span>
+                        <i v-else class="italic text-gray-400">null</i>
+                    </div>
+
+                    <button @click="regenerateApiKeyButtonClick" class="btn btn-muted">
+                        Regenerate
+                    </button>
+                </div>
+            </DetailsTable>
             <DetailsTable name="Status">
                 <Status
                     :status="device.status"
@@ -79,7 +91,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, inject, onMounted } from 'vue'
+import { defineComponent, PropType, ref, inject, onMounted, toRefs } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 import axios from 'axios'
@@ -105,18 +117,19 @@ export default defineComponent({
         },
     },
     components: { Link, Modal, Card, DetailsTable, RelativeDate, Status, Uptime, Title },
-    setup({ device }) {
+    setup(props) {
         // data
         const now = DateTime.now()
 
         // refs
-        useBreadcrumb({ name: 'Devices', page: 'devices.index' }, { name: device.name })
+        const { device } = toRefs(props)
+        useBreadcrumb({ name: 'Devices', page: 'devices.index' }, { name: device.value.name })
         const $routes = inject<RoutesModule>('$routes')
         const modalOpen = ref(false)
         const uptime = ref<DeviceUptimeModel[]>([])
         onMounted(() => {
             axios
-                .get<DeviceUptimeModel[]>($routes!.get('devices.uptime', { id: device.slug }))
+                .get<DeviceUptimeModel[]>($routes!.get('devices.uptime', { id: device.value.slug }))
                 .then((response) => (uptime.value = response.data))
         })
 
@@ -125,10 +138,20 @@ export default defineComponent({
             modalOpen.value = true
         }
         const destroy = () => {
-            Inertia.delete($routes!.get('devices.destroy', { id: device.slug }))
+            Inertia.delete($routes!.get('devices.destroy', { id: device.value.slug }))
         }
         const deactivateButtonPress = () => {
-            Inertia.patch($routes!.get('devices.deactivate', { id: device.slug }))
+            Inertia.patch($routes!.get('devices.deactivate', { id: device.value.slug }))
+        }
+        const regenerateApiKeyButtonClick = async () => {
+            try {
+                const result = await axios.patch<{ key: string }>(
+                    $routes!.get('devices.regenerateApiKey', { id: device.value.slug })
+                )
+                device.value.api_key = result.data.key
+            } catch {
+                alert('Error when regenerating api key')
+            }
         }
 
         // return
@@ -139,6 +162,7 @@ export default defineComponent({
             modalOpen,
             uptime,
             now,
+            regenerateApiKeyButtonClick,
         }
     },
 })
