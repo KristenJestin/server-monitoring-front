@@ -3,7 +3,7 @@
         <template v-slot:title>
             <div class="relative">
                 <Title :name="`Application : ${application.name}`"></Title>
-                <span class="flex absolute h-3 w-3 top-0 right-0 -mr-4">
+                <span class="flex absolute h-3 w-3 top-0 right-0 -mr-4" v-if="application.service">
                     <span
                         class="absolute inline-flex h-full w-full rounded-full opacity-75"
                         :class="status ? 'animate-ping bg-green-400' : 'bg-red-400'"
@@ -120,6 +120,8 @@ export default defineComponent({
         const modalOpen = ref(false)
         const status = ref(false)
         onMounted(() => {
+            if (!application.service) return
+
             axios
                 .get($routes!.get('applications.status', { id: application.slug }))
                 .then((response) => (status.value = response.data.active))
