@@ -41,6 +41,7 @@
                 <Status
                     :status="device.status"
                     :connection-date="device.connection_updated_at"
+                    :alive-date="device.alive_updated_at"
                     :tooltip="false"
                 ></Status>
             </DetailsTable>

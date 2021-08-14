@@ -18,6 +18,7 @@ interface Device {
     connection_updated_at?: string
     deactivated_at?: string
     api_key: string
+    alive_updated_at?: string
 
     model_id?: string
     model?: DeviceModel

@@ -26,16 +26,31 @@ export default defineComponent({
             type: String,
             required: false,
         },
+        aliveDate: {
+            type: String,
+            required: false,
+        },
         tooltip: {
             type: Boolean,
             default: true,
         },
     },
     components: { Tooltip },
-    setup({ status, connectionDate }) {
+    setup({ status, connectionDate, aliveDate }) {
         // refs
         const formatedStatus = computed(() => {
             if (status === STATUS.UP) {
+                if (aliveDate) {
+                    const alive = DateTime.fromISO(aliveDate)
+                    console.log(DateTime.local().diff(alive, 'minutes').minutes)
+                    if (DateTime.local().diff(alive, 'minutes').minutes >= 20)
+                        return {
+                            name: 'no responding',
+                            class: 'bg-yellow-100 text-yellow-800',
+                            tooltip: alive.toRelative(),
+                        }
+                }
+
                 return {
                     name: 'on',
                     class: 'bg-green-100 text-green-800',
@@ -58,7 +73,7 @@ export default defineComponent({
                     }
 
                     return {
-                        name: 'turn off',
+                        name: 'off',
                         class: 'bg-yellow-100 text-yellow-800',
                         tooltip: DateTime.fromISO(connectionDate!).toRelative(),
                     }

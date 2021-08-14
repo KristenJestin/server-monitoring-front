@@ -101,24 +101,6 @@
                                         >
                                             OS
                                         </th>
-                                        <th
-                                            scope="col"
-                                            class="
-                                                px-6
-                                                py-3
-                                                text-left text-xs
-                                                font-medium
-                                                text-gray-500
-                                                transition-colors
-                                                duration-500
-                                                ease-in-out
-                                                dark:text-gray-300
-                                                uppercase
-                                                tracking-wider
-                                            "
-                                        >
-                                            Created At
-                                        </th>
                                         <th scope="col" class="relative px-6 py-3">
                                             <span class="sr-only">Edit / Delete</span>
                                         </th>
@@ -167,6 +149,7 @@
                                             <Status
                                                 :status="device.status"
                                                 :connection-date="device.connection_updated_at"
+                                                :alive-date="device.alive_updated_at"
                                             ></Status>
                                             <span
                                                 v-if="device.deactivated_at"
@@ -193,9 +176,6 @@
                                                 <div v-if="device.os">{{ device.os }}</div>
                                                 <i v-else class="italic">not defined</i>
                                             </Tooltip>
-                                        </td>
-                                        <td class="px-6 py-2 whitespace-nowrap">
-                                            <RelativeDate :date="device.created_at"></RelativeDate>
                                         </td>
                                         <td
                                             class="

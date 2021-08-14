@@ -78,9 +78,8 @@ export default defineComponent({
         })
 
         // data
-        const results = groupBy(props.drives, (i) => i.name)
         const chart = {
-            series: Object.entries(results).map(([key, elements]) => ({
+            series: Object.entries(groupBy(props.drives, (i) => i.name)).map(([key, elements]) => ({
                 name: key,
                 data: elements.map((d) => d.total_used_percentage),
             })),
@@ -103,13 +102,17 @@ export default defineComponent({
                 },
                 xaxis: {
                     type: 'datetime',
-                    categories: props.drives
-                        .map((d) =>
-                            DateTime.fromISO(d.created_at)
-                                .endOf('minute')
-                                .toISO({ includeOffset: false })
-                        )
-                        .filter((v, i, a) => a.indexOf(v) === i),
+                    // categories: props.drives
+                    //     .map((d) =>
+                    //         DateTime.fromISO(d.created_at)
+                    //             .endOf('minute')
+                    //             .toISO({ includeOffset: false })
+                    //     )
+                    //     .filter((v, i, a) => a.indexOf(v) === i),
+                    categories: Object.entries(groupBy(props.drives, (i) => i.group)).map(
+                        ([key, elements]) =>
+                            DateTime.fromISO(elements[0].created_at).toISO({ includeOffset: false })
+                    ),
                 },
                 yaxis: {
                     min: 0,

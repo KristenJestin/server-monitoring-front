@@ -4,6 +4,7 @@ interface DeviceDrive {
     device: string
 
     name: string
+    group: string
     volume_label?: string
     drive_format: string
     drive_type: string
