@@ -19,5 +19,8 @@
         &.btn-danger {
             @apply bg-red-500 text-white  hover:bg-red-700  focus:ring-red-400;
         }
+        &.btn-danger-light {
+            @apply bg-red-100 text-red-500  hover:bg-red-500 hover:text-white  focus:ring-red-400;
+        }
     }
 }

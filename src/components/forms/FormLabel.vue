@@ -11,8 +11,9 @@
             text-sm text-left
             font-bold
         "
-        >{{ label }}</label
     >
+        {{ label }}
+    </label>
 </template>
 
 <script lang="ts">

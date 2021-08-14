@@ -9,9 +9,10 @@
         :popover="{ visibility: 'focus' }"
         :max-date="max"
         @update:modelValue="onInput"
+        :is-dark="dark"
     >
         <template v-slot="{ inputValue, inputEvents, updateValue }">
-            <div class="flex flex-col sm:flex-row justify-start items-center">
+            <div class="flex flex-col sm:flex-row justify-start items-center space-x-6">
                 <div class="relative flex-grow">
                     <CalendarIcon
                         class="text-gray-600 w-4 h-full mx-3 absolute pointer-events-none"
@@ -73,10 +74,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue'
+import { defineComponent, PropType, ref, watch } from 'vue'
 import { DatePicker } from 'v-calendar'
 import { CalendarIcon } from '@heroicons/vue/outline'
 import { XIcon } from '@heroicons/vue/solid'
+
+import useDarkMode from '@/composables/useDarkMode'
 
 export default defineComponent({
     props: {
@@ -103,15 +106,21 @@ export default defineComponent({
         XIcon,
     },
     setup({ name, ...props }, { emit }) {
+        // refs
+        const { darkMode } = useDarkMode()
         const value = ref(props.modelValue)
+
+        // methods
         const onInput = (v: Date | undefined) => {
             emit('update:modelValue', v)
         }
 
+        // return
         return {
             id: 'form-' + name,
             onInput,
             value,
+            ...darkMode,
         }
     },
 })

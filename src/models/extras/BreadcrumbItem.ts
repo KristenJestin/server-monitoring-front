@@ -1,7 +1,8 @@
 // main
 interface BreadcrumbItem {
     name: string
-    page: string
+    page?: string
+    params?: Record<string, string | number>
 }
 
 // exports

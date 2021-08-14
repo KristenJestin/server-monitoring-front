@@ -2,18 +2,18 @@
     <Card :title="`Drive : ${drive.name}`">
         <template v-slot:title-right-part>
             <button class="btn btn-danger mr-4" @click="deleteButtonPress">Delete</button>
-            <Link :href="$routes.get('drives.edit', { id: drive.slug })" class="btn btn-muted"
-                >Edit</Link
-            >
+            <Link :href="$routes.get('drives.edit', { id: drive.slug })" class="btn btn-muted">
+                Edit
+            </Link>
         </template>
 
         <div class="block">
             <div class="flex">
                 <div>{{ drive.mounted }}</div>
                 <div class="ml-auto font-bold inline-block">
-                    <small class="text-sm"
-                        >({{ humanFileSize(drive.used) }}/{{ humanFileSize(drive.blocks) }})</small
-                    >
+                    <small class="text-sm">
+                        ({{ humanFileSize(drive.used) }}/{{ humanFileSize(drive.blocks) }})
+                    </small>
                     {{ drive.capacity }}
                 </div>
             </div>
@@ -83,6 +83,7 @@ import { defineComponent, PropType, ref, inject } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import { RoutesModule } from '@/plugins/routes/props'
 import { humanFileSize } from '@/utils/readable'
 import DriveInfoModel from '@/models/DriveInfo'
@@ -90,10 +91,6 @@ import Modal from '@/components/Modal.vue'
 import Card from '@/components/Card.vue'
 
 export default defineComponent({
-    breadcrumb: [
-        { name: 'Drives', page: 'drives.index' },
-        { name: 'Show', page: 'drives.show' },
-    ],
     props: {
         drive: {
             type: Object as PropType<DriveInfoModel>,
@@ -103,6 +100,7 @@ export default defineComponent({
     components: { Link, Modal, Card },
     setup({ drive }) {
         // refs
+        useBreadcrumb({ name: 'Drives', page: 'drives.index' }, { name: 'Show' })
         const $routes = inject<RoutesModule>('$routes')
         const modalOpen = ref(false)
 

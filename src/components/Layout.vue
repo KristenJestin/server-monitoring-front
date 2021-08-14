@@ -3,9 +3,6 @@
         <div
             class="
                 bg-gray-200
-                transition
-                duration-500
-                ease-in-out
                 dark:bg-gray-800
                 transition
                 duration-500
@@ -50,11 +47,12 @@
                                                 font-medium
                                             "
                                             :class="{
-                                                'bg-gray-900 text-white transition duration-500 ease-in-out dark:bg-gray-800':
+                                                'bg-gray-900 text-white transition-colors duration-500 ease-in-out dark:bg-gray-800':
                                                     $page.url.startsWith(item.href),
                                             }"
-                                            >{{ item.name }}</Link
                                         >
+                                            {{ item.name }}
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -78,8 +76,19 @@
                                     </button>
                                 </div>
                                 <div class="ml-4 flex items-center md:ml-6">
-                                    <button href="/drives/create" class="btn btn-primary-light">
+                                    <Link
+                                        v-if="!auth"
+                                        :href="$routes.get('auth.index')"
+                                        class="btn btn-primary-light"
+                                    >
                                         Login
+                                    </Link>
+                                    <button
+                                        v-else
+                                        class="btn btn-primary-light"
+                                        @click="buttonLogoutClick"
+                                    >
+                                        Logout
                                     </button>
                                 </div>
                             </div>
@@ -153,7 +162,7 @@
                 </nav>
 
                 <main class="pt-16">
-                    <Breadcrumb :items="breadcrumb" />
+                    <Breadcrumb />
                     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                         <slot />
                     </div>
@@ -180,12 +189,13 @@
 
 <script lang="ts">
 import { defineComponent, PropType, inject } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 import { SunIcon, MoonIcon } from '@heroicons/vue/outline'
 
 import { RoutesModule } from '@/plugins/routes/props'
-import useDarkMode from '@/composables/darkMode'
-import BreadcrumbItem from '@/models/extras/BreadcrumbItem'
+import useDarkMode from '@/composables/useDarkMode'
+import AuthUserModel from '@/models/extras/AuthUser'
 import AlertModel from '@/models/extras/Alert'
 import Logo from '@/components/Logo.vue'
 import Alert from '@/components/Alert.vue'
@@ -197,9 +207,9 @@ export default defineComponent({
             type: Object as PropType<AlertModel>,
             required: false,
         },
-        breadcrumb: {
-            type: Array as PropType<BreadcrumbItem[]>,
-            default: [],
+        auth: {
+            type: Object as PropType<AuthUserModel>,
+            required: false,
         },
     },
     components: { Alert, Link, Logo, Breadcrumb, SunIcon, MoonIcon },
@@ -218,13 +228,23 @@ export default defineComponent({
                 name: 'Applications',
                 href: $routes!.get('applications.index'),
             },
+            {
+                name: 'Devices',
+                href: $routes!.get('devices.index'),
+            },
         ]
+
+        // methods
+        const buttonLogoutClick = () => {
+            Inertia.post($routes!.get('auth.logout'))
+        }
 
         // return
         return {
             menu,
             ...darkMode,
             changeDarkMode,
+            buttonLogoutClick,
         }
     },
 })

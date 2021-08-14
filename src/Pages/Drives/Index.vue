@@ -18,11 +18,9 @@
                         </component>
                     </div>
                     <div class="ml-auto font-bold inline-block">
-                        <small class="text-sm"
-                            >({{ humanFileSize(drive.used) }}/{{
-                                humanFileSize(drive.blocks)
-                            }})</small
-                        >
+                        <small class="text-sm">
+                            ({{ humanFileSize(drive.used) }}/{{ humanFileSize(drive.blocks) }})
+                        </small>
                         {{ drive.capacity }}
                     </div>
                 </div>
@@ -55,13 +53,13 @@
 import { defineComponent, PropType } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import DriveInfoModel from '@/models/DriveInfo'
 import { humanFileSize } from '@/utils/readable'
 import Card from '@/components/Card.vue'
 import Tooltip from '@/components/Tooltip.vue'
 
 export default defineComponent({
-    breadcrumb: [{ name: 'Drives', page: 'drives.index' }],
     props: {
         drives: {
             type: Object as PropType<DriveInfoModel[]>,
@@ -70,6 +68,10 @@ export default defineComponent({
     },
     components: { Link, Card, Tooltip },
     setup() {
+        // refs
+        useBreadcrumb({ name: 'Drives' })
+
+        // return
         return {
             humanFileSize,
         }

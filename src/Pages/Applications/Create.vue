@@ -71,9 +71,9 @@
 
             <div class="flex mt-6">
                 <div>
-                    <Link :href="$routes.get('applications.index')" class="btn btn-muted mr-5"
-                        >Cancel</Link
-                    >
+                    <Link :href="$routes.get('applications.index')" class="btn btn-muted mr-5">
+                        Cancel
+                    </Link>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
@@ -86,6 +86,7 @@ import { defineComponent, PropType, reactive, computed, inject } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
+import useBreadcrumb from '@/composables/useBreadcrumb'
 import { RoutesModule } from '@/plugins/routes/props'
 import Card from '@/components/Card.vue'
 import Errors from '@/models/extras/Error'
@@ -99,10 +100,6 @@ import InputFile from '@/components/forms/InputFile.vue'
 import InputTextArea from '@/components/forms/InputTextArea.vue'
 
 export default defineComponent({
-    breadcrumb: [
-        { name: 'Applications', page: 'applications.index' },
-        { name: 'Create', page: 'applications.create' },
-    ],
     props: {
         errors: {
             type: Object as PropType<Errors>,
@@ -123,6 +120,7 @@ export default defineComponent({
     },
     setup() {
         // refs
+        useBreadcrumb({ name: 'Applications', page: 'applications.index' }, { name: 'Create' })
         const $routes = inject<RoutesModule>('$routes')
         const form = reactive<{
             name: string

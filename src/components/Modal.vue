@@ -32,25 +32,21 @@
                         fixed
                         inset-0
                         bg-gray-500
-                        transition
-                        duration-500
-                        ease-in-out
                         dark:bg-gray-900
                         bg-opacity-75
-                        transition
+                        transition-all
                         duration-500
                         ease-in-out
                         dark:bg-opacity-90
-                        transition-opacity
                     "
                     aria-hidden="true"
                 ></div>
             </transition>
 
             <!-- This element is to trick the browser into centering the modal contents. -->
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true"
-                >&#8203;</span
-            >
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+                &#8203;
+            </span>
 
             <transition
                 enter-active-class="transform transition ease-out duration-300"
@@ -65,7 +61,6 @@
                         inline-block
                         align-bottom
                         bg-white
-                        transition
                         duration-500
                         ease-in-out
                         dark:bg-gray-600
